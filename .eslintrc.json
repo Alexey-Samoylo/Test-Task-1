@@ -6,7 +6,7 @@
     },
     "extends": [
       "plugin:react/recommended",
-      "plugin:@typescript-eslint/recommended",
+      "plugin:@typescript-eslint/recommended-type-checked",
       "prettier",
       "plugin:prettier/recommended",
       "plugin:import/recommended",
@@ -16,7 +16,8 @@
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
       "ecmaFeatures": {
-        "jsx": true
+        "jsx": true,
+        "tsx": true
       },
       "ecmaVersion": 12,
       "sourceType": "module"
@@ -39,6 +40,9 @@
     },
     "settings": {
       "import/resolver": {
+        "node": {
+            "extensions": [".js", ".jsx", ".ts", ".tsx"]
+        },
         "typescript": {}
       }
     }
