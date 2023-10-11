@@ -8,7 +8,7 @@ const InfoTable = () => {
     const [data, setData] = useState([])
     useEffect(() => {
         axios.get('https://cloud.feedly.com/v3/streams/contents?streamId=feed/https://www.fca.org.uk/news/rss.xml&unreadOnly=False')
-        .then((res:any) => {setData(res); console.log(res)})
+        .then((res:any) => {setData(res.data.items); console.log(res.data.items)})
     }, [])
     
 
@@ -23,11 +23,12 @@ const InfoTable = () => {
                 </tr>
             </thead>
             <tbody>
-                {data.map(el => {
-                    return (
+                {/* {data.map(el => {
+                    console.log(el.origin)
+                    return(
                         <div></div>
                     )
-                })}
+                })} */}
             </tbody>
         </Table>
     )
