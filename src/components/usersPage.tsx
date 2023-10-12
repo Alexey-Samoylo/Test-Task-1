@@ -1,10 +1,9 @@
-import NavigateButton from "../elements/navigateButton"
-import UsersTable from "../elements/usersTable"
-
+import NavigateButton from 'elements/navigateButton'
+import UsersTable from 'elements/usersTable'
 
 const UsersPage = () => {
     return (
-        <div style={{padding: '20px', display: 'flex', flexDirection: 'column', gap: '10px'}}>
+        <div className="tablePage">
             <NavigateButton name="Table" path="/" />
             <UsersTable />
         </div>

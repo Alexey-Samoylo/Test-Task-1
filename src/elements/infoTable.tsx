@@ -1,46 +1,80 @@
-import Table from 'react-bootstrap/Table';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import Table from 'react-bootstrap/Table'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { useEffect, useState, useRef } from 'react'
+import axios from 'axios'
+import InfoTablePagination from 'elements/pagination'
 
 const InfoTable = () => {
+    const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null)
 
-    const [data, setData] = useState([])
+    const [date, setData] = useState([])
+    const [viewData, setViewData] = useState([])
+    const [stickyParam, setStickyParam] = useState({
+        width: stickyElementRef.current?.clientWidth,
+        height: stickyElementRef.current?.clientHeight,
+    })
+
     useEffect(() => {
-        axios.get('https://cloud.feedly.com/v3/streams/contents?streamId=feed/https://www.fca.org.uk/news/rss.xml&unreadOnly=False')
-        .then((res:any) => {setData(res.data.items); console.log(res.data.items)})
+        setStickyParam({
+            width: stickyElementRef.current?.clientWidth,
+            height: stickyElementRef.current?.clientHeight,
+        })
+    }, [viewData])
+
+    useEffect(() => {
+        axios
+            .get(
+                'https://cloud.feedly.com/v3/streams/contents?streamId=feed/https://www.fca.org.uk/news/rss.xml&unreadOnly=False'
+            )
+            .then((res: any) => setData(res.data.items))
     }, [])
 
-    const secondElementStickyLeft = document.querySelector('th.FirstRow');
-    const widthSecondElementStickyLeft = secondElementStickyLeft?.clientWidth;
-    const heightSecondElementStickyLeft = secondElementStickyLeft?.clientHeight;
-
     return (
-        <div style={{overflow: 'auto', maxHeight: '85vh'}}>
-            <Table striped bordered hover>
-                <thead>
-                    <tr style={{position: 'sticky', top: 0, zIndex: 1000}}>
-                        <th className={'FirstRow'} style={{position: 'sticky', left:0, top:0}}>Title</th>
-                        <th style={{position: 'sticky', left: widthSecondElementStickyLeft, top:0}}>Author</th>
-                        <th>Keywords</th>
-                        <th>Summary</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((el: any) => {
-                        return(
-                            <tr>
-                                <td style={{position: 'sticky', left: 0}}>{el.title}</td>
-                                <td style={{position: 'sticky', left: widthSecondElementStickyLeft}}>{el.author}</td>
-                                <td>{el.keywords}</td>
-                                <td>{el.summary.content.replace("&amp", "&")}</td>
-                            </tr>
-                        )
-                    })}
-                </tbody>
-            </Table>
-        </div>
+        <>
+            <InfoTablePagination date={date} setViewData={setViewData} />
+            <div className="tableCard">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr className="sticky" style={{ zIndex: 1000 }}>
+                            <th ref={stickyElementRef} className={'sticky'}>
+                                Title
+                            </th>
+                            <th
+                                className="sticky"
+                                style={{ left: stickyParam.width }}
+                            >
+                                Author
+                            </th>
+                            <th>Keywords</th>
+                            <th>Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {viewData.map((el: any) => {
+                            return (
+                                <tr>
+                                    <td className="sticky">{el.title}</td>
+                                    <td
+                                        className="sticky"
+                                        style={{ left: stickyParam.width }}
+                                    >
+                                        {el.author}
+                                    </td>
+                                    <td>{el.keywords}</td>
+                                    <td>
+                                        {el.summary.content.replace(
+                                            '&amp',
+                                            '&'
+                                        )}
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            </div>
+        </>
     )
 }
 
-export default InfoTable;
+export default InfoTable
