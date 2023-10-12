@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TablePage from './components/tablepage';
+import TablePage from './components/tablePage';
+import UsersPage from './components/usersPage';
 
 
 function App() {
@@ -8,7 +9,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<TablePage />} />
-          <Route path='/users' element={<div>Users</div>} />
+          <Route path='/users' element={<UsersPage />} />
         </Routes>
       </BrowserRouter>
     </div>

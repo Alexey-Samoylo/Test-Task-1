@@ -1,5 +1,5 @@
 import NavigateButton from "../elements/navigateButton";
-import InfoTable from "../elements/table";
+import InfoTable from "../elements/infoTable";
 
 
 const TablePage = () => {
