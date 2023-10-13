@@ -2,28 +2,18 @@ import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import ReactPaginate from 'react-paginate';
 import './pagination.css'
 
-const InfoTablePagination = (props: {date: any, setViewData: Dispatch<SetStateAction<never[]>>}) => {
+const InfoTablePagination = (props: {data: any, setViewData: Dispatch<SetStateAction<never[]>>}) => {
     
     const [itemOffset, setItemOffset] = useState(0)
     const itemsPerPage = 2;
+    const pageCount = Math.ceil(props.data?props.data.items.length/itemsPerPage:0)
 
-    // Simulate fetching items from another resources.
-    // (This could be items from props; or items loaded in a local state
-    // from an API endpoint with useEffect and useState)
-    // const endOffset = itemOffset + itemsPerPage
-    // console.log(`Loading items from ${itemOffset} to ${endOffset}`)
     useEffect(()=> {
-        props.setViewData(props.date.slice(itemOffset, itemOffset + itemsPerPage))
-    }, [itemOffset, props.date])
-    // const currentItems = props.date.slice(itemOffset, endOffset)
-    const pageCount = Math.ceil(props.date.length / itemsPerPage)
-
-    // Invoke when user click to request another page.
+        props.setViewData(!props.data?[]:props.data.items.slice(itemOffset, itemOffset + itemsPerPage))
+    }, [itemOffset, props.data])
     const handlePageClick = (event: any) => {
-        const newOffset = (event.selected * itemsPerPage) % props.date.length
-        // console.log(
-        //     `User requested page number ${event.selected}, which is offset ${newOffset}`
-        // )
+        const newOffset = (event.selected * itemsPerPage) % props.data.items.length
+        console.log(newOffset)
         setItemOffset(newOffset)
     }
 

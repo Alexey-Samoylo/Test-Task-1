@@ -1,14 +1,13 @@
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import InfoTablePagination from './pagination';
+import { itemsAPI } from '../redux/services/itemsService';
 
 const InfoTable = () => {
 
     const secondElementStickyLeft = document.querySelector('th.FirstRow');
 
-    const [date, setData] = useState([])
     const [viewData, setViewData] = useState([])
     const [stickyParam, setStickyParam] = useState({
         width: secondElementStickyLeft?.clientWidth,
@@ -21,18 +20,10 @@ const InfoTable = () => {
             height: secondElementStickyLeft?.clientHeight
         })
     }, [viewData])
-
-    useEffect(() => {
-        axios.get('https://cloud.feedly.com/v3/streams/contents?streamId=feed/https://www.fca.org.uk/news/rss.xml&unreadOnly=False')
-        .then((res:any) => setData(res.data.items))
-    }, [])
-
-    // const widthSecondElementStickyLeft = secondElementStickyLeft?.clientWidth;
-    // const heightSecondElementStickyLeft = secondElementStickyLeft?.clientHeight;
+    const {data: items} = itemsAPI.useFetchAllItemsQuery('')
 
     return (
         <>
-            <InfoTablePagination date={date} setViewData={setViewData} />
             <div style={{overflow: 'auto', maxHeight: '85vh'}}>
                 <Table striped bordered hover>
                     <thead>
@@ -57,6 +48,7 @@ const InfoTable = () => {
                     </tbody>
                 </Table>
             </div>
+            <InfoTablePagination data={items} setViewData={setViewData} />
         </>
     )
 }
