@@ -4,13 +4,21 @@ import Button from 'react-bootstrap/Button';
 import minus from '../assets/images/minus.svg'
 import plus from '../assets/images/plus.svg'
 import edit from '../assets/images/pencil.svg'
-import ModalAdd from "./modalAddEdit";
+import ModalAdd, { users } from "./modalAddEdit";
 
 
 const UsersTable = () => {
     const localStorageUsersDate = localStorage.getItem('usersDate')
     const [usersDate, setUsersDate] = useState(localStorageUsersDate?JSON.parse(localStorageUsersDate):[]);
     const [showModal, setShowModal] = useState(false)
+
+    const deleteUsers = (index: number) => {
+        // usersDate.splice(index, 1)
+        // localStorage.setItem('usersDate', JSON.stringify(usersDate))
+        // console.log(usersDate)
+    }
+
+    
 
     return (
         <div style={{overflow: 'auto', maxHeight: '85vh'}}>
@@ -26,15 +34,15 @@ const UsersTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {usersDate.map((el: any) => {
+                    {usersDate.map((el: any, index: number) => {
                         return(
                             <tr>
                                 <td>{el.firstName}</td>
                                 <td>{el.lastName}</td>
                                 <td>{el.email}</td>
                                 <td>{el.role}</td>
-                                <td><img src={edit} alt="edit"/></td>
-                                <td><img src={minus} alt="minus"/></td>
+                                <td><img src={edit} alt="edit" /></td>
+                                <td><img src={minus} alt="minus" onClick={() => deleteUsers(index)} /></td>
                             </tr>
                         )
                     })}

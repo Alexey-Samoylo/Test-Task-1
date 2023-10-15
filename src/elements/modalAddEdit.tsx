@@ -3,28 +3,47 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
+export interface users {
+    'firstName': string,
+    'lastName': string,
+    'email': string,
+    'role': string
+}
+
 const ModalAdd = (props: {show: boolean, 
                         setShow: Dispatch<SetStateAction<boolean>>,
                         usersDate: any,
                         setUsersDate: Dispatch<SetStateAction<boolean>>}) => {
-
-    const [newUser, setNewUser] = useState({
+                            
+    const [newUser, setNewUser] = useState<users>({
         'firstName': '',
         'lastName': '',
         'email': '',
         'role': 'Admin',
     })
 
+    const sourceUser = {
+        'firstName': '',
+        'lastName': '',
+        'email': '',
+        'role': 'Admin',
+    }
+
     const handleClose = () => props.setShow(false)
     const seveAndClose = () => {
-        localStorage.setItem('usersDate', JSON.stringify(props.usersDate.concat(newUser)))
-        props.setUsersDate(props.usersDate.concat(newUser))
+        // console.log(props.usersDate.concat(newUser))
+        // localStorage.setItem('usersDate', JSON.stringify(props.usersDate.concat(newUser)))
+        console.log()
+        props.setUsersDate(props.usersDate.concat([newUser]))
+        // setNewUser(sourceUser)
         props.setShow(false);
     }
 
     const setParam = (props: {name: string, value: string}) => {
-        newUser[props.name as keyof typeof newUser] = props.value
-        console.log(newUser)
+        const saveNewUser = Object.assign({}, newUser)
+        saveNewUser[props.name as keyof typeof newUser] = props.value
+        // newUser[props.name as keyof typeof newUser] = props.value
+        setNewUser(saveNewUser)
     }
 
     return (
