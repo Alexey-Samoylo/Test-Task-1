@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import TablePage from 'components/TablePage'
-import UsersPage from 'components/UsersPage'
-import 'App.scss'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import TablePage from 'components/TablePage';
+import UsersPage from 'components/UsersPage';
+import 'App.scss';
 
 function App() {
     return (
@@ -17,7 +17,7 @@ function App() {
                 </Routes>
             </BrowserRouter>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;

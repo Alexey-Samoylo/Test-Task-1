@@ -1,15 +1,14 @@
-import { IDataItems, IItems } from "../models/IItems"
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { fetchItems } from "./ActionCreator"
+import { DataItems } from '../models/reduxModels';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-interface DataItems {
-    items: IDataItems,
-    isLoading: boolean,
-    error: string,
-    count: number
+interface ReducerData {
+    items: DataItems;
+    isLoading: boolean;
+    error: string;
+    count: number;
 }
 
-const initialState: DataItems = {
+const initialState: ReducerData = {
     items: {
         alternate: {},
         direction: 'string',
@@ -20,40 +19,26 @@ const initialState: DataItems = {
     },
     isLoading: false,
     error: '',
-    count: 0
-}
+    count: 0,
+};
 
 export const dataSlice = createSlice({
     name: 'items',
     initialState,
     reducers: {
-        // itemsFetching(state) {
-        //     state.isLoading = true;
-        // },
-        // itemsFetchingSuccess(state, action: PayloadAction<IItems[]>) {
-        //     state.isLoading = false;
-        //     state.error = '';
-        //     state.items = action.payload;
-        // },
-        // itemsFetchingError(state, action: PayloadAction<string>) {
-        //     state.isLoading = false;
-        //     state.error = action.payload;
-        // },
-    },
-    extraReducers: {
-        [fetchItems.fulfilled.type]: (state, action: PayloadAction<IDataItems>) => {
+        itemsFetching(state) {
+            state.isLoading = true;
+        },
+        itemsFetchingSuccess(state, action: PayloadAction<DataItems>) {
             state.isLoading = false;
             state.error = '';
             state.items = action.payload;
         },
-        [fetchItems.pending.type]: (state, action: PayloadAction<IItems[]>) => {
-            state.isLoading = true;
-        },
-        [fetchItems.rejected.type]: (state, action: PayloadAction<string>) => {
+        itemsFetchingError(state, action: PayloadAction<string>) {
             state.isLoading = false;
             state.error = action.payload;
-        }
-    }
-})
+        },
+    },
+});
 
 export default dataSlice.reducer;
