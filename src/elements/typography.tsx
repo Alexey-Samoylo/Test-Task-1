@@ -1,7 +1,3 @@
+const Typography = () => {}
 
-
-const Typography = () => {
-    
-}
-
-export default Typography;
+export default Typography

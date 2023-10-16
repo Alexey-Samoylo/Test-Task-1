@@ -1,33 +1,37 @@
-import { useState, useEffect, SetStateAction, Dispatch } from 'react';
-import ReactPaginate from 'react-paginate';
-import './pagination.css'
+import { useState, useEffect, SetStateAction, Dispatch } from 'react'
+import ReactPaginate from 'react-paginate'
+import './pagination.scss'
 
-const InfoTablePagination = (props: {data: any, setViewData: Dispatch<SetStateAction<never[]>>}) => {
-    
+const InfoTablePagination = (props: {
+    date: any
+    setViewData: Dispatch<SetStateAction<never[]>>
+}) => {
     const [itemOffset, setItemOffset] = useState(0)
-    const itemsPerPage = 2;
-    const pageCount = Math.ceil(props.data?props.data.items.length/itemsPerPage:0)
+    const itemsPerPage = 2
 
-    useEffect(()=> {
-        props.setViewData(!props.data?[]:props.data.items.slice(itemOffset, itemOffset + itemsPerPage))
-    }, [itemOffset, props.data])
+    useEffect(() => {
+        props.setViewData(
+            props.date.slice(itemOffset, itemOffset + itemsPerPage)
+        )
+    }, [itemOffset, props.date])
+    const pageCount = Math.ceil(props.date.length / itemsPerPage)
+
     const handlePageClick = (event: any) => {
-        const newOffset = (event.selected * itemsPerPage) % props.data.items.length
-        console.log(newOffset)
+        const newOffset = (event.selected * itemsPerPage) % props.date.length
         setItemOffset(newOffset)
     }
 
     return (
         <ReactPaginate
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={handlePageClick}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="<"
-        renderOnZeroPageCount={null}
-      />
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={5}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+        />
     )
 }
 
-export default InfoTablePagination;
+export default InfoTablePagination

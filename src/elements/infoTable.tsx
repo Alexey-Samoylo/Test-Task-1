@@ -5,43 +5,60 @@ import InfoTablePagination from './pagination';
 import { itemsAPI } from '../redux/services/itemsService';
 
 const InfoTable = () => {
-
-    const secondElementStickyLeft = document.querySelector('th.FirstRow');
+    const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null)
 
     const [viewData, setViewData] = useState([])
     const [stickyParam, setStickyParam] = useState({
-        width: secondElementStickyLeft?.clientWidth,
-        height: secondElementStickyLeft?.clientHeight
+        width: stickyElementRef.current?.clientWidth,
+        height: stickyElementRef.current?.clientHeight,
     })
 
     useEffect(() => {
         setStickyParam({
-            width: secondElementStickyLeft?.clientWidth,
-            height: secondElementStickyLeft?.clientHeight
+            width: stickyElementRef.current?.clientWidth,
+            height: stickyElementRef.current?.clientHeight,
         })
     }, [viewData])
     const {data: items} = itemsAPI.useFetchAllItemsQuery('')
 
     return (
         <>
-            <div style={{overflow: 'auto', maxHeight: '85vh'}}>
+            <InfoTablePagination date={date} setViewData={setViewData} />
+            <div className="tableCard">
                 <Table striped bordered hover>
                     <thead>
-                        <tr style={{position: 'sticky', top: 0, zIndex: 1000}}>
-                            <th className={'FirstRow'} style={{position: 'sticky', left:0, top:0}}>Title</th>
-                            <th style={{position: 'sticky', left: stickyParam.width, top:0}}>Author</th>
+                        <tr className="sticky" style={{ zIndex: 1000 }}>
+                            <th ref={stickyElementRef} className={'sticky'}>
+                                Title
+                            </th>
+                            <th
+                                className="sticky"
+                                style={{ left: stickyParam.width }}
+                            >
+                                Author
+                            </th>
                             <th>Keywords</th>
                             <th>Summary</th>
                         </tr>
                     </thead>
                     <tbody>
                         {viewData.map((el: any) => {
-                            return(
+                            return (
                                 <tr>
-                                    <td style={{position: 'sticky', left: 0}}>{el.title}</td>
-                                    <td style={{position: 'sticky', left: stickyParam.width}}>{el.author}</td>
+                                    <td className="sticky">{el.title}</td>
+                                    <td
+                                        className="sticky"
+                                        style={{ left: stickyParam.width }}
+                                    >
+                                        {el.author}
+                                    </td>
                                     <td>{el.keywords}</td>
-                                    <td>{el.summary.content.replace("&amp", "&")}</td>
+                                    <td>
+                                        {el.summary.content.replace(
+                                            '&amp',
+                                            '&'
+                                        )}
+                                    </td>
                                 </tr>
                             )
                         })}
@@ -53,4 +70,4 @@ const InfoTable = () => {
     )
 }
 
-export default InfoTable;
+export default InfoTable

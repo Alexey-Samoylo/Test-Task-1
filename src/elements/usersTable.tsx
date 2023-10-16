@@ -39,8 +39,14 @@ const UsersTable = () => {
     
 
     return (
-        <div style={{overflow: 'auto', maxHeight: '85vh'}}>
-            <Button variant="success" onClick={() => setShowModal(true)} style={{marginBottom: '10px'}}>Add <img alt="add" src={plus} /></Button>
+        <div className="tableCard">
+            <Button
+                variant="success"
+                onClick={() => setOpen(true)}
+                style={{ marginBottom: '10px' }}
+            >
+                Add <img alt="add" src={plus} />
+            </Button>
             <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -67,10 +73,15 @@ const UsersTable = () => {
                 </tbody>
             </Table>
             <div>
-                <ModalAdd show={showModal} setShow={setShowModal} usersData={usersData} setUsersData={setUsersData} />
+                <AddUserModal
+                    isOpen={isOpen}
+                    setOpen={setOpen}
+                    usersData={usersDatа}
+                    setUsersDatа={setUsersDatа}
+                />
             </div>
         </div>
     )
 }
 
-export default UsersTable;
+export default UsersTable
