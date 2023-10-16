@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { Table } from "react-bootstrap";
 import Button from 'react-bootstrap/Button';
 import minus from '../assets/images/minus.svg'
@@ -6,16 +6,34 @@ import plus from '../assets/images/plus.svg'
 import edit from '../assets/images/pencil.svg'
 import ModalAdd, { users } from "./modalAddEdit";
 
+interface usersModalProps {
+    show: boolean,
+    setShow: Dispatch<SetStateAction<boolean>>,
+    usersData: users[],
+    setUsersData: Dispatch<SetStateAction<users[]>>
+    editData?: users,
+    index?: number,
+} 
 
 const UsersTable = () => {
-    const localStorageUsersDate = localStorage.getItem('usersDate')
-    const [usersDate, setUsersDate] = useState(localStorageUsersDate?JSON.parse(localStorageUsersDate):[]);
+    const localStorageUsersDate = localStorage.getItem('usersData')
+    const [usersData, setUsersData] = useState(localStorageUsersDate?JSON.parse(localStorageUsersDate):[]);
     const [showModal, setShowModal] = useState(false)
+    const [editUser, setEditUser] = useState({
+        data: usersData,
+    })
 
-    const deleteUsers = (index: number) => {
-        // usersDate.splice(index, 1)
-        // localStorage.setItem('usersDate', JSON.stringify(usersDate))
-        // console.log(usersDate)
+    const deleteUser = (index: number) => {
+        usersData.splice(index, 1)
+        setUsersData(usersData.slice())
+    }
+
+    useEffect(() => {
+        localStorage.setItem('usersData', JSON.stringify(usersData))
+    }, [usersData])
+
+    const edituser = (data: users, index: number) => {
+         
     }
 
     
@@ -34,7 +52,7 @@ const UsersTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {usersDate.map((el: any, index: number) => {
+                    {usersData.map((el: any, index: number) => {
                         return(
                             <tr>
                                 <td>{el.firstName}</td>
@@ -42,14 +60,14 @@ const UsersTable = () => {
                                 <td>{el.email}</td>
                                 <td>{el.role}</td>
                                 <td><img src={edit} alt="edit" /></td>
-                                <td><img src={minus} alt="minus" onClick={() => deleteUsers(index)} /></td>
+                                <td><img src={minus} alt="minus" onClick={() => deleteUser(index)} /></td>
                             </tr>
                         )
                     })}
                 </tbody>
             </Table>
             <div>
-                <ModalAdd show={showModal} setShow={setShowModal} usersDate={usersDate} setUsersDate={setUsersDate} />
+                <ModalAdd show={showModal} setShow={setShowModal} usersData={usersData} setUsersData={setUsersData} />
             </div>
         </div>
     )

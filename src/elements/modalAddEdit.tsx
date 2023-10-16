@@ -12,8 +12,8 @@ export interface users {
 
 const ModalAdd = (props: {show: boolean, 
                         setShow: Dispatch<SetStateAction<boolean>>,
-                        usersDate: any,
-                        setUsersDate: Dispatch<SetStateAction<boolean>>}) => {
+                        usersData: any,
+                        setUsersData: Dispatch<SetStateAction<boolean>>}) => {
                             
     const [newUser, setNewUser] = useState<users>({
         'firstName': '',
@@ -22,27 +22,22 @@ const ModalAdd = (props: {show: boolean,
         'role': 'Admin',
     })
 
-    const sourceUser = {
-        'firstName': '',
-        'lastName': '',
-        'email': '',
-        'role': 'Admin',
-    }
+    // const sourceUser = {
+    //     'firstName': '',
+    //     'lastName': '',
+    //     'email': '',
+    //     'role': 'Admin',
+    // }
 
     const handleClose = () => props.setShow(false)
     const seveAndClose = () => {
-        // console.log(props.usersDate.concat(newUser))
-        // localStorage.setItem('usersDate', JSON.stringify(props.usersDate.concat(newUser)))
-        console.log()
-        props.setUsersDate(props.usersDate.concat([newUser]))
-        // setNewUser(sourceUser)
+        props.setUsersData(props.usersData.concat([newUser]))
         props.setShow(false);
     }
 
     const setParam = (props: {name: string, value: string}) => {
         const saveNewUser = Object.assign({}, newUser)
         saveNewUser[props.name as keyof typeof newUser] = props.value
-        // newUser[props.name as keyof typeof newUser] = props.value
         setNewUser(saveNewUser)
     }
 
