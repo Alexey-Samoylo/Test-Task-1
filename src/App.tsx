@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import TablePage from 'components/TablePage'
 import UsersPage from 'components/UsersPage'
-import 'App.css'
+import 'App.scss'
 
 function App() {
     return (

@@ -4,6 +4,21 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { AddUserModalProps, UserModalProps } from 'models'
 
+const formTable = [
+    {
+        title: 'First Name',
+        lable: 'firstName',
+    },
+    {
+        title: 'Last Name',
+        lable: 'lastName',
+    },
+    {
+        title: 'Email',
+        lable: 'email',
+    },
+]
+
 const AddUserModal = (props: AddUserModalProps) => {
     const [newUser, setNewUser] = useState<UserModalProps>({
         firstName: '',
@@ -33,20 +48,17 @@ const AddUserModal = (props: AddUserModalProps) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    {['First Name', 'Last Name', 'Email'].map((el) => {
+                    {formTable.map((el) => {
                         return (
                             <Form.Group
                                 className="mb-3"
                                 controlId="exampleForm.ControlTextarea1"
                             >
-                                <Form.Label>{el}</Form.Label>
+                                <Form.Label>{el.title}</Form.Label>
                                 <Form.Control
                                     onChange={(e) =>
                                         setParam({
-                                            name: el
-                                                .split(' ')
-                                                .join('')
-                                                .toLowerCase(),
+                                            name: el.lable,
                                             value: e.target.value,
                                         })
                                     }

@@ -1,16 +1,8 @@
-<<<<<<< HEAD
 import Table from 'react-bootstrap/Table'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { useEffect, useState, useRef } from 'react'
 import axios from 'axios'
 import InfoTablePagination from 'elements/pagination'
-=======
-import Table from 'react-bootstrap/Table';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import InfoTablePagination from './pagination';
->>>>>>> 2bb8af4d48f07a739962f3b97c46e15138261b4d
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null)
@@ -22,7 +14,6 @@ const InfoTable = () => {
         height: stickyElementRef.current?.clientHeight,
     })
 
-<<<<<<< HEAD
     useEffect(() => {
         setStickyParam({
             width: stickyElementRef.current?.clientWidth,
@@ -54,48 +45,12 @@ const InfoTable = () => {
                             >
                                 Author
                             </th>
-=======
-    const secondElementStickyLeft = document.querySelector('th.FirstRow');
-
-    const [date, setData] = useState([])
-    const [viewData, setViewData] = useState([])
-    const [stickyParam, setStickyParam] = useState({
-        width: secondElementStickyLeft?.clientWidth,
-        height: secondElementStickyLeft?.clientHeight
-    })
-
-    useEffect(() => {
-        setStickyParam({
-            width: secondElementStickyLeft?.clientWidth,
-            height: secondElementStickyLeft?.clientHeight
-        })
-    }, [viewData])
-
-    useEffect(() => {
-        axios.get('https://cloud.feedly.com/v3/streams/contents?streamId=feed/https://www.fca.org.uk/news/rss.xml&unreadOnly=False')
-        .then((res:any) => setData(res.data.items))
-    }, [])
-
-    // const widthSecondElementStickyLeft = secondElementStickyLeft?.clientWidth;
-    // const heightSecondElementStickyLeft = secondElementStickyLeft?.clientHeight;
-
-    return (
-        <>
-            <InfoTablePagination date={date} setViewData={setViewData} />
-            <div style={{overflow: 'auto', maxHeight: '85vh'}}>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr style={{position: 'sticky', top: 0, zIndex: 1000}}>
-                            <th className={'FirstRow'} style={{position: 'sticky', left:0, top:0}}>Title</th>
-                            <th style={{position: 'sticky', left: stickyParam.width, top:0}}>Author</th>
->>>>>>> 2bb8af4d48f07a739962f3b97c46e15138261b4d
                             <th>Keywords</th>
                             <th>Summary</th>
                         </tr>
                     </thead>
                     <tbody>
                         {viewData.map((el: any) => {
-<<<<<<< HEAD
                             return (
                                 <tr>
                                     <td className="sticky">{el.title}</td>
@@ -112,14 +67,6 @@ const InfoTable = () => {
                                             '&'
                                         )}
                                     </td>
-=======
-                            return(
-                                <tr>
-                                    <td style={{position: 'sticky', left: 0}}>{el.title}</td>
-                                    <td style={{position: 'sticky', left: stickyParam.width}}>{el.author}</td>
-                                    <td>{el.keywords}</td>
-                                    <td>{el.summary.content.replace("&amp", "&")}</td>
->>>>>>> 2bb8af4d48f07a739962f3b97c46e15138261b4d
                                 </tr>
                             )
                         })}
