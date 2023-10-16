@@ -13,7 +13,8 @@ export interface users {
 const ModalAdd = (props: {show: boolean, 
                         setShow: Dispatch<SetStateAction<boolean>>,
                         usersData: any,
-                        setUsersData: Dispatch<SetStateAction<boolean>>}) => {
+                        setUsersData: Dispatch<SetStateAction<boolean>>,
+                        index: number}) => {
                             
     const [newUser, setNewUser] = useState<users>({
         'firstName': '',

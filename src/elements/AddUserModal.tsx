@@ -20,7 +20,7 @@ const formTable = [
 ]
 
 const AddUserModal = (props: AddUserModalProps) => {
-    const [newUser, setNewUser] = useState<UserModalProps>({
+    const [newUser, setNewUser] = useState<UserModalProps>(props.index?props.usersData[props.index]:{
         firstName: '',
         lastName: '',
         email: '',
@@ -39,6 +39,7 @@ const AddUserModal = (props: AddUserModalProps) => {
 
     const setParam = (props: { name: string; value: string }) => {
         newUser[props.name as keyof typeof newUser] = props.value
+        setParam(Object.assign(newUser))
     }
 
     return (
@@ -49,6 +50,7 @@ const AddUserModal = (props: AddUserModalProps) => {
             <Modal.Body>
                 <Form>
                     {formTable.map((el) => {
+                        console.log(newUser[el.lable as keyof typeof newUser])
                         return (
                             <Form.Group
                                 className="mb-3"
@@ -56,6 +58,7 @@ const AddUserModal = (props: AddUserModalProps) => {
                             >
                                 <Form.Label>{el.title}</Form.Label>
                                 <Form.Control
+                                    value={newUser[el.lable as keyof typeof newUser]}
                                     onChange={(e) =>
                                         setParam({
                                             name: el.lable,
@@ -92,4 +95,4 @@ const AddUserModal = (props: AddUserModalProps) => {
     )
 }
 
-export default AddUserModal
+export default AddUserModal;

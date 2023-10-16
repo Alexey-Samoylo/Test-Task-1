@@ -4,7 +4,8 @@ export interface AddUserModalProps {
     isOpen: boolean
     setOpen: Dispatch<SetStateAction<boolean>>
     usersData: UserModalProps[]
-    setUsersDatа: Dispatch<SetStateAction<UserModalProps[]>>
+    setUsersDatа: Dispatch<SetStateAction<UserModalProps[]>>,
+    index: number|undefined,
 }
 
 export interface UserModalProps {

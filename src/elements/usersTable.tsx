@@ -5,6 +5,7 @@ import minus from '../assets/images/minus.svg'
 import plus from '../assets/images/plus.svg'
 import edit from '../assets/images/pencil.svg'
 import ModalAdd, { users } from "./modalAddEdit";
+import AddUserModal from "./AddUserModal";
 
 interface usersModalProps {
     show: boolean,
@@ -18,10 +19,8 @@ interface usersModalProps {
 const UsersTable = () => {
     const localStorageUsersDate = localStorage.getItem('usersData')
     const [usersData, setUsersData] = useState(localStorageUsersDate?JSON.parse(localStorageUsersDate):[]);
-    const [showModal, setShowModal] = useState(false)
-    const [editUser, setEditUser] = useState({
-        data: usersData,
-    })
+    const [isOpen, setOpen] = useState(false)
+    const [editUserIndex, setEditUserIndex] = useState<number|undefined>()
 
     const deleteUser = (index: number) => {
         usersData.splice(index, 1)
@@ -32,8 +31,9 @@ const UsersTable = () => {
         localStorage.setItem('usersData', JSON.stringify(usersData))
     }, [usersData])
 
-    const edituser = (data: users, index: number) => {
-         
+    const editUser = ( index: number) => {
+         setEditUserIndex(index);
+         setOpen(true)
     }
 
     
@@ -58,14 +58,14 @@ const UsersTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {usersData.map((el: any, index: number) => {
+                    {usersData.map((el: users, index: number) => {
                         return(
                             <tr>
                                 <td>{el.firstName}</td>
                                 <td>{el.lastName}</td>
                                 <td>{el.email}</td>
                                 <td>{el.role}</td>
-                                <td><img src={edit} alt="edit" /></td>
+                                <td><img src={edit} alt="edit" onClick={() => editUser(index)}/></td>
                                 <td><img src={minus} alt="minus" onClick={() => deleteUser(index)} /></td>
                             </tr>
                         )
@@ -76,8 +76,9 @@ const UsersTable = () => {
                 <AddUserModal
                     isOpen={isOpen}
                     setOpen={setOpen}
-                    usersData={usersDatа}
-                    setUsersDatа={setUsersDatа}
+                    usersData={usersData}
+                    setUsersDatа={setUsersData}
+                    index={editUserIndex}
                 />
             </div>
         </div>

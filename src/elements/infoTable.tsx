@@ -1,13 +1,14 @@
 import Table from 'react-bootstrap/Table';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import InfoTablePagination from './pagination';
 import { itemsAPI } from '../redux/services/itemsService';
+import { IItems } from 'redux/models/IItems';
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null)
 
-    const [viewData, setViewData] = useState([])
+    const [viewData, setViewData] = useState<IItems[]>([])
     const [stickyParam, setStickyParam] = useState({
         width: stickyElementRef.current?.clientWidth,
         height: stickyElementRef.current?.clientHeight,
@@ -23,7 +24,7 @@ const InfoTable = () => {
 
     return (
         <>
-            <InfoTablePagination date={date} setViewData={setViewData} />
+            <InfoTablePagination data={items} setViewData={setViewData} />
             <div className="tableCard">
                 <Table striped bordered hover>
                     <thead>
@@ -65,7 +66,6 @@ const InfoTable = () => {
                     </tbody>
                 </Table>
             </div>
-            <InfoTablePagination data={items} setViewData={setViewData} />
         </>
     )
 }
