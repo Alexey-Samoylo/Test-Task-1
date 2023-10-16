@@ -1,0 +1,23 @@
+.tablePage {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.tableCard {
+    overflow: auto;
+    max-height: 85vh;
+}
+.sticky {
+    position: sticky;
+    top: 0;
+    left: 0;
+}
+.navigateButton {
+    background-color: blue;
+    color: white;
+    max-width: fit-content;
+    padding: 2px 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}

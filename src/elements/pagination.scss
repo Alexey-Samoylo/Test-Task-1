@@ -1,0 +1,18 @@
+ul[aria-label='Pagination'] {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    list-style-type: none;
+    padding: 0;
+    li {
+        background-color: blue;
+        padding: 3px;
+        width: 25px;
+        text-align: center;
+        border-radius: 5px;
+        color: white;
+    };
+    li.selected {
+        background-color: blueviolet;
+    }
+}
