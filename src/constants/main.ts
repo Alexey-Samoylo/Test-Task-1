@@ -27,7 +27,7 @@ const DEFAULT_TYPOGRAPHY_STYLES: CSSProperties = {
     fontWeight: 'normal',
     fontSize: 'normal',
     lineHeight: 'normal',
-    color: 'red',
+    color: 'black',
     display: 'block',
 };
 
