@@ -5,8 +5,8 @@ export interface AddUserModalProps {
     setOpen: Dispatch<SetStateAction<boolean>>;
     usersData: UserModalProps[];
     setUsersDatа: Dispatch<SetStateAction<UserModalProps[]>>;
-    index: number | undefined;
-    setIndex: Dispatch<SetStateAction<number | undefined>>;
+    index: number | null;
+    setIndex: Dispatch<SetStateAction<number | null>>;
 }
 
 export interface UserModalProps {
@@ -14,4 +14,9 @@ export interface UserModalProps {
     lastName: string;
     email: string;
     role: string;
+}
+
+export interface FormTableFieldProps {
+    value: string;
+    label: string;
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import { useEffect, useState } from 'react';
 import { Table } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import minus from '../assets/images/minus.svg';
@@ -13,7 +13,7 @@ const UsersTable = () => {
         localStorageUsersData ? JSON.parse(localStorageUsersData) : []
     );
     const [isOpen, setOpen] = useState(false);
-    const [editUserIndex, setEditUserIndex] = useState<number | undefined>();
+    const [editUserIndex, setEditUserIndex] = useState<number | null>(null);
 
     const deleteUser = (index: number) => {
         usersData.splice(index, 1);
@@ -21,7 +21,7 @@ const UsersTable = () => {
     };
     useEffect(() => {
         if (!isOpen) {
-            setEditUserIndex(undefined);
+            setEditUserIndex(null);
         }
     }, [isOpen]);
 

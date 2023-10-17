@@ -25,7 +25,7 @@ const InfoTable = () => {
     return (
         <>
             <InfoTablePagination
-                data={items !== undefined ? items.items : []}
+                data={items?.items ?? []}
                 setViewData={setViewData}
             />
             <div className="tableCard">

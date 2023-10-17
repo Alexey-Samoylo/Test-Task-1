@@ -1,51 +1,29 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { AddUserModalProps, UserModalProps } from 'models';
-
-const formTable = [
-    {
-        title: 'First Name',
-        label: 'firstName',
-    },
-    {
-        title: 'Last Name',
-        label: 'lastName',
-    },
-    {
-        title: 'Email',
-        label: 'email',
-    },
-];
+import { AddUserModalProps, FormTableFieldProps, UserModalProps } from 'models';
+import { EMPTY_USER_DETAILS, formTableFields } from 'constant';
 
 const UserModal = (props: AddUserModalProps) => {
     const { isOpen, setOpen, usersData, setUsersDatа, index, setIndex } = props;
+
+    const getUserDetails = (
+        index: number | null,
+        usersData: UserModalProps[]
+    ) => {
+        return index !== null ? usersData[index] : EMPTY_USER_DETAILS;
+    };
+
     const [newUser, setNewUser] = useState<UserModalProps>(
-        index !== undefined
-            ? usersData[index]
-            : {
-                  firstName: '',
-                  lastName: '',
-                  email: '',
-                  role: 'Admin',
-              }
+        getUserDetails(index, usersData)
     );
     useEffect(() => {
-        setNewUser(
-            index !== undefined
-                ? usersData[index]
-                : {
-                      firstName: '',
-                      lastName: '',
-                      email: '',
-                      role: 'Admin',
-                  }
-        );
+        setNewUser(getUserDetails(index, usersData));
     }, [isOpen]);
 
     const handleClose = () => setOpen(false);
-    const seveAndClose = () => {
+    const saveAndClose = () => {
         localStorage.setItem(
             'usersData',
             JSON.stringify([...usersData, newUser])
@@ -61,25 +39,25 @@ const UserModal = (props: AddUserModalProps) => {
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    {formTable.map(el => {
+                    {formTableFields.map((field: FormTableFieldProps) => {
                         return (
                             <Form.Group
                                 className="mb-3"
                                 controlId="exampleForm.ControlTextarea1">
-                                <Form.Label>{el.title}</Form.Label>
+                                <Form.Label>{field.label}</Form.Label>
                                 <Form.Control
                                     value={
                                         newUser[
-                                            el.label as keyof typeof newUser
+                                            field.value as keyof typeof newUser
                                         ]
                                     }
                                     onChange={e =>
                                         setNewUser({
                                             ...newUser,
-                                            [el.label]: e.target.value,
+                                            [field.value]: e.target.value,
                                         })
                                     }
-                                    placeholder="First Name"
+                                    placeholder={field.label}
                                 />
                             </Form.Group>
                         );
@@ -101,7 +79,7 @@ const UserModal = (props: AddUserModalProps) => {
                 <Button variant="secondary" onClick={handleClose}>
                     Close
                 </Button>
-                <Button variant="primary" onClick={seveAndClose}>
+                <Button variant="primary" onClick={saveAndClose}>
                     Save
                 </Button>
             </Modal.Footer>
