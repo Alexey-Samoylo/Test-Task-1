@@ -1,25 +1,28 @@
-import { useState, useEffect, SetStateAction, Dispatch } from 'react'
-import ReactPaginate from 'react-paginate'
-import './pagination.scss'
+import { useState, useEffect, SetStateAction, Dispatch } from 'react';
+import ReactPaginate from 'react-paginate';
+import './pagination.scss';
+import { Items } from 'redux/models/reduxModels';
+import { ITEMS_PER_PAGE } from 'constant';
 
 const InfoTablePagination = (props: {
-    date: any
-    setViewData: Dispatch<SetStateAction<never[]>>
+    data: Items[];
+    setViewData: Dispatch<SetStateAction<Items[]>>;
 }) => {
-    const [itemOffset, setItemOffset] = useState(0)
-    const itemsPerPage = 2
+    const [itemOffset, setItemOffset] = useState(0);
 
     useEffect(() => {
         props.setViewData(
-            props.date.slice(itemOffset, itemOffset + itemsPerPage)
-        )
-    }, [itemOffset, props.date])
-    const pageCount = Math.ceil(props.date.length / itemsPerPage)
+            props.data.slice(itemOffset, itemOffset + ITEMS_PER_PAGE)
+        );
+    }, [itemOffset, props.data]);
+    const pageCount = Math.ceil(
+        props.data ? props.data.length / ITEMS_PER_PAGE : 0
+    );
 
     const handlePageClick = (event: any) => {
-        const newOffset = (event.selected * itemsPerPage) % props.date.length
-        setItemOffset(newOffset)
-    }
+        const newOffset = (event.selected * ITEMS_PER_PAGE) % props.data.length;
+        setItemOffset(newOffset);
+    };
 
     return (
         <ReactPaginate
@@ -31,7 +34,7 @@ const InfoTablePagination = (props: {
             previousLabel="<"
             renderOnZeroPageCount={null}
         />
-    )
-}
+    );
+};
 
-export default InfoTablePagination
+export default InfoTablePagination;

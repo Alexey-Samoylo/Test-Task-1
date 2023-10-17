@@ -1,25 +1,45 @@
-import { useState } from 'react'
-import { Table } from 'react-bootstrap'
-import Button from 'react-bootstrap/Button'
-import minus from 'assets/images/minus.svg'
-import plus from 'assets/images/plus.svg'
-import edit from 'assets/images/pencil.svg'
-import AddUserModal from 'elements/AddUserModal'
+import { useEffect, useState } from 'react';
+import { Table } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import minus from '../assets/images/minus.svg';
+import plus from '../assets/images/plus.svg';
+import edit from '../assets/images/pencil.svg';
+import UserModal from './UserModal';
+import { UserModalProps } from 'models';
 
 const UsersTable = () => {
-    const localStorageUsersDatа = localStorage.getItem('usersDatа')
-    const [usersDatа, setUsersDatа] = useState(
-        localStorageUsersDatа ? JSON.parse(localStorageUsersDatа) : []
-    )
-    const [isOpen, setOpen] = useState(false)
+    const localStorageUsersData = localStorage.getItem('usersData');
+    const [usersData, setUsersData] = useState(
+        localStorageUsersData ? JSON.parse(localStorageUsersData) : []
+    );
+    const [isOpen, setOpen] = useState(false);
+    const [editUserIndex, setEditUserIndex] = useState<number | null>(null);
+
+    const deleteUser = (index: number) => {
+        usersData.splice(index, 1);
+        setUsersData(usersData.slice());
+    };
+    useEffect(() => {
+        if (!isOpen) {
+            setEditUserIndex(null);
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        localStorage.setItem('usersData', JSON.stringify(usersData));
+    }, [usersData]);
+
+    const editUser = (index: number) => {
+        setEditUserIndex(index);
+        setOpen(true);
+    };
 
     return (
         <div className="tableCard">
             <Button
                 variant="success"
                 onClick={() => setOpen(true)}
-                style={{ marginBottom: '10px' }}
-            >
+                style={{ marginBottom: '10px' }}>
                 Add <img alt="add" src={plus} />
             </Button>
             <Table striped bordered hover>
@@ -33,7 +53,7 @@ const UsersTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {usersDatа.map((el: any) => {
+                    {usersData.map((el: UserModalProps, index: number) => {
                         return (
                             <tr>
                                 <td>{el.firstName}</td>
@@ -41,26 +61,36 @@ const UsersTable = () => {
                                 <td>{el.email}</td>
                                 <td>{el.role}</td>
                                 <td>
-                                    <img src={edit} alt="edit" />
+                                    <img
+                                        src={edit}
+                                        alt="edit"
+                                        onClick={() => editUser(index)}
+                                    />
                                 </td>
                                 <td>
-                                    <img src={minus} alt="minus" />
+                                    <img
+                                        src={minus}
+                                        alt="minus"
+                                        onClick={() => deleteUser(index)}
+                                    />
                                 </td>
                             </tr>
-                        )
+                        );
                     })}
                 </tbody>
             </Table>
             <div>
-                <AddUserModal
+                <UserModal
                     isOpen={isOpen}
                     setOpen={setOpen}
-                    usersData={usersDatа}
-                    setUsersDatа={setUsersDatа}
+                    usersData={usersData}
+                    setUsersDatа={setUsersData}
+                    index={editUserIndex}
+                    setIndex={setEditUserIndex}
                 />
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default UsersTable
+export default UsersTable;

@@ -1,5 +1,5 @@
-import NavigateButton from 'elements/navigateButton'
-import InfoTable from 'elements/infoTable'
+import NavigateButton from 'elements/navigateButton';
+import InfoTable from 'elements/infoTable';
 
 const TablePage = () => {
     return (
@@ -7,6 +7,6 @@ const TablePage = () => {
             <NavigateButton name="Users" path="users" />
             <InfoTable />
         </div>
-    )
-}
-export default TablePage
+    );
+};
+export default TablePage;
