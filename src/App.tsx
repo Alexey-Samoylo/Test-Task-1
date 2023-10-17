@@ -13,7 +13,11 @@ function App() {
                     <Route path="/users" element={<UsersPage />} />
                     <Route
                         path="*"
-                        element={<Typography style={{ color: 'red', fontSize: 40 }}>Page not found</Typography>}
+                        element={
+                            <Typography style={{ color: 'red', fontSize: 40 }}>
+                                Page not found
+                            </Typography>
+                        }
                     />
                 </Routes>
             </BrowserRouter>

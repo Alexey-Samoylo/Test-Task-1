@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties } from 'react';
 
 const formTableFields = [
     {
@@ -31,4 +31,9 @@ const DEFAULT_TYPOGRAPHY_STYLES: CSSProperties = {
     display: 'block',
 };
 
-export { formTableFields, EMPTY_USER_DETAILS, ITEMS_PER_PAGE, DEFAULT_TYPOGRAPHY_STYLES };
+export {
+    formTableFields,
+    EMPTY_USER_DETAILS,
+    ITEMS_PER_PAGE,
+    DEFAULT_TYPOGRAPHY_STYLES,
+};

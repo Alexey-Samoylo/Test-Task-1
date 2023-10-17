@@ -25,5 +25,5 @@ export interface TypographyProps {
     style?: CSSProperties;
     className?: string;
     onClick?: () => void;
-    ref?: Ref<any>
+    ref?: Ref<any>;
 }

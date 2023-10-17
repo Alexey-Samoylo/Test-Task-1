@@ -41,26 +41,36 @@ const InfoTable = () => {
                                 style={{ left: stickyParam.width }}>
                                 <Typography>Author</Typography>
                             </th>
-                            <th><Typography>Keywords</Typography></th>
-                            <th><Typography>Summary</Typography></th>
+                            <th>
+                                <Typography>Keywords</Typography>
+                            </th>
+                            <th>
+                                <Typography>Summary</Typography>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         {viewData.map((item: Items) => {
                             return (
                                 <tr>
-                                    <td className="sticky"><Typography>{item.title}</Typography></td>
+                                    <td className="sticky">
+                                        <Typography>{item.title}</Typography>
+                                    </td>
                                     <td
                                         className="sticky"
                                         style={{ left: stickyParam.width }}>
                                         <Typography>{item.author}</Typography>
                                     </td>
-                                    <td><Typography>{item.keywords}</Typography></td>
                                     <td>
-                                        <Typography>{item.summary.content.replace(
-                                            '&amp',
-                                            '&'
-                                        )}</Typography>
+                                        <Typography>{item.keywords}</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography>
+                                            {item.summary.content.replace(
+                                                '&amp',
+                                                '&'
+                                            )}
+                                        </Typography>
                                     </td>
                                 </tr>
                             );
