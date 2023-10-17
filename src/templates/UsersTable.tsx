@@ -100,7 +100,7 @@ const UsersTable = () => {
                     isOpen={isOpen}
                     setOpen={setOpen}
                     usersData={usersData}
-                    setUsersDatа={setUsersData}
+                    setUsersData={setUsersData}
                     index={editUserIndex}
                 />
             </div>
