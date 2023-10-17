@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { AddUserModalProps, FormTableFieldProps, UserModalProps } from 'models';
-import { EMPTY_USER_DETAILS, formTableFields } from 'constant';
+import { EMPTY_USER_DETAILS, formTableFields } from 'constants/index';
 import Typography from './Typography';
 
 const UserModal = ({
@@ -13,7 +13,6 @@ const UserModal = ({
     setUsersDatа,
     index,
 }: AddUserModalProps) => {
-    // const { isOpen, setOpen, usersData, setUsersDatа, index, setIndex } = props;
 
     const getUserDetails = (
         index: number | null,
