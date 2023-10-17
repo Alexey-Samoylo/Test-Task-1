@@ -46,18 +46,18 @@ const InfoTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {viewData.map((el: Items) => {
+                        {viewData.map((item: Items) => {
                             return (
                                 <tr>
-                                    <td className="sticky"><Typography>{el.title}</Typography></td>
+                                    <td className="sticky"><Typography>{item.title}</Typography></td>
                                     <td
                                         className="sticky"
                                         style={{ left: stickyParam.width }}>
-                                        <Typography>{el.author}</Typography>
+                                        <Typography>{item.author}</Typography>
                                     </td>
-                                    <td><Typography>{el.keywords}</Typography></td>
+                                    <td><Typography>{item.keywords}</Typography></td>
                                     <td>
-                                        <Typography>{el.summary.content.replace(
+                                        <Typography>{item.summary.content.replace(
                                             '&amp',
                                             '&'
                                         )}</Typography>

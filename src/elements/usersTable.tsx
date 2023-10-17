@@ -62,20 +62,20 @@ const UsersTable = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {usersData.map((el: UserModalProps, index: number) => {
+                    {usersData.map((user: UserModalProps, index: number) => {
                         return (
                             <tr>
                                 <td>
-                                    <Typography>{el.firstName}</Typography>
+                                    <Typography>{user.firstName}</Typography>
                                 </td>
                                 <td>
-                                    <Typography>{el.lastName}</Typography>
+                                    <Typography>{user.lastName}</Typography>
                                 </td>
                                 <td>
-                                    <Typography>{el.email}</Typography>
+                                    <Typography>{user.email}</Typography>
                                 </td>
                                 <td>
-                                    <Typography>{el.role}</Typography>
+                                    <Typography>{user.role}</Typography>
                                 </td>
                                 <td>
                                     <img
