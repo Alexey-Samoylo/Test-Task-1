@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import TablePage from 'components/TablePage';
 import UsersPage from 'components/UsersPage';
 import 'App.scss';
+import Typography from 'elements/Typography';
 
 function App() {
     return (
@@ -12,7 +13,7 @@ function App() {
                     <Route path="/users" element={<UsersPage />} />
                     <Route
                         path="*"
-                        element={<h1 style={{ color: 'red' }}>Error</h1>}
+                        element={<Typography style={{ color: 'red', fontSize: 40 }}>Page not found</Typography>}
                     />
                 </Routes>
             </BrowserRouter>

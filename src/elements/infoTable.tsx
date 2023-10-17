@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import InfoTablePagination from './pagination';
 import { itemsAPI } from '../redux/services/itemsService';
 import { Items } from 'redux/models/reduxModels';
+import Typography from './Typography';
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null);
@@ -33,33 +34,33 @@ const InfoTable = () => {
                     <thead>
                         <tr className="sticky" style={{ zIndex: 1000 }}>
                             <th ref={stickyElementRef} className={'sticky'}>
-                                Title
+                                <Typography>Title</Typography>
                             </th>
                             <th
                                 className="sticky"
                                 style={{ left: stickyParam.width }}>
-                                Author
+                                <Typography>Author</Typography>
                             </th>
-                            <th>Keywords</th>
-                            <th>Summary</th>
+                            <th><Typography>Keywords</Typography></th>
+                            <th><Typography>Summary</Typography></th>
                         </tr>
                     </thead>
                     <tbody>
                         {viewData.map((el: Items) => {
                             return (
                                 <tr>
-                                    <td className="sticky">{el.title}</td>
+                                    <td className="sticky"><Typography>{el.title}</Typography></td>
                                     <td
                                         className="sticky"
                                         style={{ left: stickyParam.width }}>
-                                        {el.author}
+                                        <Typography>{el.author}</Typography>
                                     </td>
-                                    <td>{el.keywords}</td>
+                                    <td><Typography>{el.keywords}</Typography></td>
                                     <td>
-                                        {el.summary.content.replace(
+                                        <Typography>{el.summary.content.replace(
                                             '&amp',
                                             '&'
-                                        )}
+                                        )}</Typography>
                                     </td>
                                 </tr>
                             );

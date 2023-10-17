@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+
 const formTableFields = [
     {
         label: 'First Name',
@@ -19,5 +21,14 @@ const EMPTY_USER_DETAILS = {
     role: 'Admin',
 };
 const ITEMS_PER_PAGE = 2;
+const DEFAULT_TYPOGRAPHY_STYLES: CSSProperties = {
+    textTransform: 'none',
+    textAlign: 'center',
+    fontWeight: 'normal',
+    fontSize: 'normal',
+    lineHeight: 'normal',
+    color: 'red',
+    display: 'block',
+};
 
-export { formTableFields, EMPTY_USER_DETAILS, ITEMS_PER_PAGE };
+export { formTableFields, EMPTY_USER_DETAILS, ITEMS_PER_PAGE, DEFAULT_TYPOGRAPHY_STYLES };

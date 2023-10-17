@@ -4,9 +4,16 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { AddUserModalProps, FormTableFieldProps, UserModalProps } from 'models';
 import { EMPTY_USER_DETAILS, formTableFields } from 'constant';
+import Typography from './Typography';
 
-const UserModal = (props: AddUserModalProps) => {
-    const { isOpen, setOpen, usersData, setUsersDatа, index, setIndex } = props;
+const UserModal = ({
+    isOpen,
+    setOpen,
+    usersData,
+    setUsersDatа,
+    index,
+}: AddUserModalProps) => {
+    // const { isOpen, setOpen, usersData, setUsersDatа, index, setIndex } = props;
 
     const getUserDetails = (
         index: number | null,
@@ -35,7 +42,9 @@ const UserModal = (props: AddUserModalProps) => {
     return (
         <Modal show={isOpen} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Add new user</Modal.Title>
+                <Modal.Title>
+                    <Typography>Add new user</Typography>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
@@ -69,18 +78,24 @@ const UserModal = (props: AddUserModalProps) => {
                         onChange={e =>
                             setNewUser({ ...newUser, role: e.target.value })
                         }>
-                        <option value="Admin">Admin</option>
-                        <option value="User">User</option>
-                        <option value="Editor">Editor</option>
+                        <option value="Admin">
+                            <Typography>Admin</Typography>
+                        </option>
+                        <option value="User">
+                            <Typography>User</Typography>
+                        </option>
+                        <option value="Editor">
+                            <Typography>Editor</Typography>
+                        </option>
                     </Form.Control>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    <Typography>Close</Typography>
                 </Button>
                 <Button variant="primary" onClick={saveAndClose}>
-                    Save
+                    <Typography>Save</Typography>
                 </Button>
             </Modal.Footer>
         </Modal>

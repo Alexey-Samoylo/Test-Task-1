@@ -6,6 +6,7 @@ import plus from '../assets/images/plus.svg';
 import edit from '../assets/images/pencil.svg';
 import UserModal from './UserModal';
 import { UserModalProps } from 'models';
+import Typography from './Typography';
 
 const UsersTable = () => {
     const localStorageUsersData = localStorage.getItem('usersData');
@@ -40,15 +41,23 @@ const UsersTable = () => {
                 variant="success"
                 onClick={() => setOpen(true)}
                 style={{ marginBottom: '10px' }}>
-                Add <img alt="add" src={plus} />
+                <Typography>Add</Typography> <img alt="add" src={plus} />
             </Button>
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Second Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
+                        <th>
+                            <Typography>First Name</Typography>
+                        </th>
+                        <th>
+                            <Typography>Second Name</Typography>
+                        </th>
+                        <th>
+                            <Typography>Email</Typography>
+                        </th>
+                        <th>
+                            <Typography>Role</Typography>
+                        </th>
                         <th colSpan={2}></th>
                     </tr>
                 </thead>
@@ -56,10 +65,18 @@ const UsersTable = () => {
                     {usersData.map((el: UserModalProps, index: number) => {
                         return (
                             <tr>
-                                <td>{el.firstName}</td>
-                                <td>{el.lastName}</td>
-                                <td>{el.email}</td>
-                                <td>{el.role}</td>
+                                <td>
+                                    <Typography>{el.firstName}</Typography>
+                                </td>
+                                <td>
+                                    <Typography>{el.lastName}</Typography>
+                                </td>
+                                <td>
+                                    <Typography>{el.email}</Typography>
+                                </td>
+                                <td>
+                                    <Typography>{el.role}</Typography>
+                                </td>
                                 <td>
                                     <img
                                         src={edit}
@@ -86,7 +103,6 @@ const UsersTable = () => {
                     usersData={usersData}
                     setUsersDatа={setUsersData}
                     index={editUserIndex}
-                    setIndex={setEditUserIndex}
                 />
             </div>
         </div>
