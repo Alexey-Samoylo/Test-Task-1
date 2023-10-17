@@ -1,10 +1,8 @@
-import Table from 'react-bootstrap/Table';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table } from 'react-bootstrap';
 import { useEffect, useState, useRef } from 'react';
-import InfoTablePagination from './pagination';
-import { itemsAPI } from '../redux/services/itemsService';
+import { itemsAPI } from 'redux/services/itemsService';
 import { Items } from 'redux/models/reduxModels';
-import Typography from './Typography';
+import { InfoTablePagination, Typography } from 'components';
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null);

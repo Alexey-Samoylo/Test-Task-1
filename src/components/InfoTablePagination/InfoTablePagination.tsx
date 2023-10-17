@@ -2,7 +2,7 @@ import { useState, useEffect, SetStateAction, Dispatch } from 'react';
 import ReactPaginate from 'react-paginate';
 import './pagination.scss';
 import { Items } from 'redux/models/reduxModels';
-import { ITEMS_PER_PAGE } from 'constants/index';
+import { ITEMS_PER_PAGE } from 'constants/main';
 
 const InfoTablePagination = (props: {
     data: Items[];

@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
+import { Table, Button } from 'react-bootstrap';
 import minus from '../assets/images/minus.svg';
 import plus from '../assets/images/plus.svg';
 import edit from '../assets/images/pencil.svg';
-import UserModal from './UserModal';
+import { UserModal } from 'templates';
 import { UserModalProps } from 'models';
-import Typography from './Typography';
+import { Typography } from 'components';
 
 const UsersTable = () => {
     const localStorageUsersData = localStorage.getItem('usersData');

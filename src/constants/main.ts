@@ -1,6 +1,6 @@
 import { CSSProperties } from 'react';
 
-const formTableFields = [
+const FORM_TABLE_FIELDS = [
     {
         label: 'First Name',
         value: 'firstName',
@@ -32,7 +32,7 @@ const DEFAULT_TYPOGRAPHY_STYLES: CSSProperties = {
 };
 
 export {
-    formTableFields,
+    FORM_TABLE_FIELDS,
     EMPTY_USER_DETAILS,
     ITEMS_PER_PAGE,
     DEFAULT_TYPOGRAPHY_STYLES,

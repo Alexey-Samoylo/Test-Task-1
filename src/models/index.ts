@@ -5,7 +5,7 @@ export interface AddUserModalProps {
     isOpen: boolean;
     setOpen: Dispatch<SetStateAction<boolean>>;
     usersData: UserModalProps[];
-    setUsersDatа: Dispatch<SetStateAction<UserModalProps[]>>;
+    setUsersData: Dispatch<SetStateAction<UserModalProps[]>>;
     index: number | null;
 }
 

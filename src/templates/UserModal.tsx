@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Modal, Form, Button } from 'react-bootstrap';
 import { AddUserModalProps, FormTableFieldProps, UserModalProps } from 'models';
-import { EMPTY_USER_DETAILS, formTableFields } from 'constants/index';
-import Typography from './Typography';
+import { EMPTY_USER_DETAILS, FORM_TABLE_FIELDS } from 'constants/main';
+import { Typography } from 'components';
 
 const UserModal = ({
     isOpen,
     setOpen,
     usersData,
-    setUsersDatа,
+    setUsersData,
     index,
 }: AddUserModalProps) => {
 
@@ -34,7 +32,7 @@ const UserModal = ({
             'usersData',
             JSON.stringify([...usersData, newUser])
         );
-        setUsersDatа([...usersData, newUser]);
+        setUsersData([...usersData, newUser]);
         setOpen(false);
     };
 
@@ -47,7 +45,7 @@ const UserModal = ({
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    {formTableFields.map((field: FormTableFieldProps) => {
+                    {FORM_TABLE_FIELDS.map((field: FormTableFieldProps) => {
                         return (
                             <Form.Group
                                 className="mb-3"

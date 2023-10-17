@@ -1,8 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TablePage from 'components/TablePage';
-import UsersPage from 'components/UsersPage';
 import 'App.scss';
-import Typography from 'elements/Typography';
+import UsersPage from 'pages/UsersPage';
+import TablePage from 'pages/TablePage';
+import { Typography } from 'components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (

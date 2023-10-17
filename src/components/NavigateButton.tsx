@@ -1,6 +1,6 @@
-import { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import Typography from './Typography';
+import { Typography } from 'components';
+
 
 const NavigateButton = (props: { name: string; path: string }) => {
     return (
