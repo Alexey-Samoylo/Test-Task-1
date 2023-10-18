@@ -5,13 +5,15 @@
       "jest": true
     },
     "extends": [
+      "eslint:recommended",
       "plugin:react/recommended",
       "plugin:@typescript-eslint/recommended-type-checked",
       "plugin:@typescript-eslint/stylistic-type-checked",
       "prettier",
       "plugin:prettier/recommended",
       "plugin:import/recommended",
-      "airbnb"
+      "airbnb",
+      "root: true"
     ],
     "overrides": [],
     "parser": "@typescript-eslint/parser",
