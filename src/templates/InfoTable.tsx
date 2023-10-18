@@ -1,12 +1,14 @@
 import { Table, Spinner } from 'react-bootstrap';
 import { useEffect, useState, useRef } from 'react';
 import { itemsAPI } from 'redux/services/itemsService';
-import { Items } from 'redux/models/reduxModels';
+import { Coins, Items } from 'redux/models/reduxModels';
 import { InfoTablePagination, Typography } from 'components';
+import { ITEMS_PER_PAGE } from 'constants/main';
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null);
 
+    const [pageOffset, setPageOffset] = useState(0);
     const [viewData, setViewData] = useState<Items[]>([]);
     const [stickyParam, setStickyParam] = useState({
         width: stickyElementRef.current?.clientWidth,
@@ -19,47 +21,49 @@ const InfoTable = () => {
             height: stickyElementRef.current?.clientHeight,
         });
     }, [viewData]);
-    const { data: items, isLoading } = itemsAPI.useFetchAllItemsQuery('');
+    const { data: items, isLoading } =
+        itemsAPI.useFetchAllItemsQuery(pageOffset);
+    useEffect(() => {
+        console.log(isLoading);
+    }, [isLoading]);
 
     return (
         <>
-            {isLoading ? (
-                <Spinner animation="border" variant="primary" />
-            ) : (
-                <>
-                    <InfoTablePagination
-                        data={items?.items ?? []}
-                        setViewData={setViewData}
-                    />
-                    <div className="tableCard">
-                        <Table striped bordered hover>
-                            <thead>
-                                <tr className="sticky" style={{ zIndex: 1000 }}>
-                                    <th
-                                        ref={stickyElementRef}
-                                        className={'sticky'}>
-                                        <Typography>Title</Typography>
-                                    </th>
-                                    <th
-                                        className="sticky"
-                                        style={{ left: stickyParam.width }}>
-                                        <Typography>Author</Typography>
-                                    </th>
-                                    <th>
-                                        <Typography>Keywords</Typography>
-                                    </th>
-                                    <th>
-                                        <Typography>Summary</Typography>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {viewData.map((item: Items) => {
+            <InfoTablePagination
+                setPageOffset={setPageOffset}
+                totalPages={items?.data.stats.total / ITEMS_PER_PAGE ?? 0}
+            />
+            <div className="tableCard">
+                <Table striped bordered hover>
+                    <thead>
+                        <tr className="sticky" style={{ zIndex: 1000 }}>
+                            <th ref={stickyElementRef} className={'sticky'}>
+                                <Typography>Title</Typography>
+                            </th>
+                            <th
+                                className="sticky"
+                                style={{ left: stickyParam.width }}>
+                                <Typography>Author</Typography>
+                            </th>
+                            <th>
+                                <Typography>Keywords</Typography>
+                            </th>
+                            <th>
+                                <Typography>Summary</Typography>
+                            </th>
+                        </tr>
+                    </thead>
+                    {isLoading ? (
+                        <Spinner animation="border" variant="primary" />
+                    ) : (
+                        <tbody>
+                            {items &&
+                                items.data.coins.map((coins: Coins) => {
                                     return (
                                         <tr>
                                             <td className="sticky">
                                                 <Typography>
-                                                    {item.title}
+                                                    {coins.name}
                                                 </Typography>
                                             </td>
                                             <td
@@ -68,30 +72,26 @@ const InfoTable = () => {
                                                     left: stickyParam.width,
                                                 }}>
                                                 <Typography>
-                                                    {item.author}
+                                                    {coins.uuid}
                                                 </Typography>
                                             </td>
                                             <td>
                                                 <Typography>
-                                                    {item.keywords}
+                                                    {coins.price}
                                                 </Typography>
                                             </td>
                                             <td>
                                                 <Typography>
-                                                    {item.summary.content.replace(
-                                                        '&amp',
-                                                        '&'
-                                                    )}
+                                                    {coins.marketCap}
                                                 </Typography>
                                             </td>
                                         </tr>
                                     );
                                 })}
-                            </tbody>
-                        </Table>
-                    </div>
-                </>
-            )}
+                        </tbody>
+                    )}
+                </Table>
+            </div>
         </>
     );
 };

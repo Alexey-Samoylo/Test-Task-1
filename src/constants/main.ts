@@ -20,7 +20,7 @@ const EMPTY_USER_DETAILS = {
     email: '',
     role: 'Admin',
 };
-const ITEMS_PER_PAGE = 2;
+const ITEMS_PER_PAGE = 50;
 const DEFAULT_TYPOGRAPHY_STYLES: CSSProperties = {
     textTransform: 'none',
     textAlign: 'center',

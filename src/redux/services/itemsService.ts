@@ -1,12 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react';
+import { ITEMS_PER_PAGE } from 'constants/main';
 
 export const itemsAPI = createApi({
     reducerPath: 'itemAPI',
-    baseQuery: fetchBaseQuery({ baseUrl: '' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://api.coinranking.com/v2/' }),
     endpoints: build => ({
         fetchAllItems: build.query({
-            query: () => ({
-                url: `https://cloud.feedly.com/v3/streams/contents?streamId=feed/https://www.fca.org.uk/news/rss.xml&unreadOnly=False`,
+            query: (pageOffset: number) => ({
+                url: 'coins',
+                params: {
+                    limit: ITEMS_PER_PAGE,
+                    offset: pageOffset,
+                }
             }),
         }),
     }),

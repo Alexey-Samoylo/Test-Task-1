@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ReactNode, CSSProperties, Ref } from 'react';
+import { Items } from 'redux/models/reduxModels';
 
 export interface AddUserModalProps {
     isOpen: boolean;
@@ -8,14 +9,12 @@ export interface AddUserModalProps {
     setUsersData: Dispatch<SetStateAction<UserModalProps[]>>;
     index: number | null;
 }
-
 export interface UserModalProps {
     firstName: string;
     lastName: string;
     email: string;
     role: string;
 }
-
 export interface FormTableFieldProps {
     value: string;
     label: string;
@@ -26,4 +25,8 @@ export interface TypographyProps {
     className?: string;
     onClick?: () => void;
     ref?: Ref<any>;
+}
+export interface InfoTablePaginationProps {
+    setPageOffset: Dispatch<SetStateAction<number>>;
+    totalPages: number
 }

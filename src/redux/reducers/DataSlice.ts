@@ -1,8 +1,8 @@
-import { DataItems } from '../models/reduxModels';
+import { CoinsData, } from '../models/reduxModels';
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 interface ReducerData {
-    items: DataItems;
+    items: CoinsData;
     isLoading: boolean;
     error: string;
     count: number;
@@ -10,14 +10,30 @@ interface ReducerData {
 
 const initialState: ReducerData = {
     items: {
-        alternate: {},
-        direction: 'string',
-        id: 'string',
-        items: [],
-        title: 'string',
-        updated: 0,
+        data: [{
+            coins: [{
+                '24hVolume': '',
+                btcPrice: '',
+                change: '',
+                coinrankingUrl: '',
+                color: '',
+                iconUrl: '',
+                listedAt: 0,
+                lowVolume: false,
+                marketCap: '',
+                name: '',
+                price: '',
+                rank: 0,
+                sparkline: [''],
+                symbol: '',
+                tier: 0,
+                uuid: ''
+            }],
+            stats: [],
+        }],
+        status: ''
     },
-    isLoading: false,
+    isLoading: true,
     error: '',
     count: 0,
 };
@@ -28,8 +44,9 @@ export const dataSlice = createSlice({
     reducers: {
         itemsFetching(state) {
             state.isLoading = true;
+            console.log(state.isLoading)
         },
-        itemsFetchingSuccess(state, action: PayloadAction<DataItems>) {
+        itemsFetchingSuccess(state, action: PayloadAction<CoinsData>) {
             state.isLoading = false;
             state.error = '';
             state.items = action.payload;
