@@ -23,9 +23,6 @@ const InfoTable = () => {
     }, [viewData]);
     const { data: items, isLoading } =
         itemsAPI.useFetchAllItemsQuery(pageOffset);
-    useEffect(() => {
-        console.log(isLoading);
-    }, [isLoading]);
 
     return (
         <>

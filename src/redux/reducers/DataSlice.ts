@@ -44,7 +44,6 @@ export const dataSlice = createSlice({
     reducers: {
         itemsFetching(state) {
             state.isLoading = true;
-            console.log(state.isLoading)
         },
         itemsFetchingSuccess(state, action: PayloadAction<CoinsData>) {
             state.isLoading = false;
