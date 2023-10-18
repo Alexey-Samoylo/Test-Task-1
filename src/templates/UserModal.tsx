@@ -72,6 +72,7 @@ const UserModal = ({
                             </Form.Group>
                         );
                     })}
+                    <Form.Label><Typography>Role</Typography></Form.Label>
                     <Form.Control
                         aria-label="Default select example"
                         as="select"
