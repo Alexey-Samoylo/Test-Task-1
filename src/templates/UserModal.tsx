@@ -15,23 +15,28 @@ const UserModal = ({
         index: number | null,
         usersData: UserModalProps[]
     ) => {
-        return index !== null ? usersData[index] : EMPTY_USER_DETAILS;
+        return !index ? EMPTY_USER_DETAILS : usersData[index];
     };
 
     const [newUser, setNewUser] = useState<UserModalProps>(
         getUserDetails(index, usersData)
     );
+
+    const getUsersDataUpdate = (index: number | null, usersData: UserModalProps[]) => {
+        if (!index) {
+            return [...usersData, newUser]
+        } else {
+            usersData[index] = newUser
+            return [...usersData]
+        }
+    }
     useEffect(() => {
         setNewUser(getUserDetails(index, usersData));
     }, [isOpen]);
 
     const handleClose = () => setOpen(false);
     const saveAndClose = () => {
-        localStorage.setItem(
-            'usersData',
-            JSON.stringify([...usersData, newUser])
-        );
-        setUsersData([...usersData, newUser]);
+        setUsersData(getUsersDataUpdate(index, usersData));
         setOpen(false);
     };
 
