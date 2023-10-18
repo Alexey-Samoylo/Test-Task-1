@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+import { Modal, Form, Button } from 'react-bootstrap';
 import { AddUserModalProps, FormTableFieldProps, UserModalProps } from 'models';
-import { EMPTY_USER_DETAILS, formTableFields } from 'constant';
+import { EMPTY_USER_DETAILS, FORM_TABLE_FIELDS } from 'constants/main';
+import { Typography } from 'components';
 
-const UserModal = (props: AddUserModalProps) => {
-    const { isOpen, setOpen, usersData, setUsersDatа, index, setIndex } = props;
-
+const UserModal = ({
+    isOpen,
+    setOpen,
+    usersData,
+    setUsersData,
+    index,
+}: AddUserModalProps) => {
     const getUserDetails = (
         index: number | null,
         usersData: UserModalProps[]
@@ -28,18 +31,20 @@ const UserModal = (props: AddUserModalProps) => {
             'usersData',
             JSON.stringify([...usersData, newUser])
         );
-        setUsersDatа([...usersData, newUser]);
+        setUsersData([...usersData, newUser]);
         setOpen(false);
     };
 
     return (
         <Modal show={isOpen} onHide={handleClose}>
             <Modal.Header closeButton>
-                <Modal.Title>Add new user</Modal.Title>
+                <Modal.Title>
+                    <Typography>Add new user</Typography>
+                </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Form>
-                    {formTableFields.map((field: FormTableFieldProps) => {
+                    {FORM_TABLE_FIELDS.map((field: FormTableFieldProps) => {
                         return (
                             <Form.Group
                                 className="mb-3"
@@ -69,18 +74,24 @@ const UserModal = (props: AddUserModalProps) => {
                         onChange={e =>
                             setNewUser({ ...newUser, role: e.target.value })
                         }>
-                        <option value="Admin">Admin</option>
-                        <option value="User">User</option>
-                        <option value="Editor">Editor</option>
+                        <option value="Admin">
+                            <Typography>Admin</Typography>
+                        </option>
+                        <option value="User">
+                            <Typography>User</Typography>
+                        </option>
+                        <option value="Editor">
+                            <Typography>Editor</Typography>
+                        </option>
                     </Form.Control>
                 </Form>
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>
-                    Close
+                    <Typography>Close</Typography>
                 </Button>
                 <Button variant="primary" onClick={saveAndClose}>
-                    Save
+                    <Typography>Save</Typography>
                 </Button>
             </Modal.Footer>
         </Modal>

@@ -1,9 +1,8 @@
-import Table from 'react-bootstrap/Table';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Table } from 'react-bootstrap';
 import { useEffect, useState, useRef } from 'react';
-import InfoTablePagination from './pagination';
-import { itemsAPI } from '../redux/services/itemsService';
+import { itemsAPI } from 'redux/services/itemsService';
 import { Items } from 'redux/models/reduxModels';
+import { InfoTablePagination, Typography } from 'components';
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null);
@@ -33,33 +32,43 @@ const InfoTable = () => {
                     <thead>
                         <tr className="sticky" style={{ zIndex: 1000 }}>
                             <th ref={stickyElementRef} className={'sticky'}>
-                                Title
+                                <Typography>Title</Typography>
                             </th>
                             <th
                                 className="sticky"
                                 style={{ left: stickyParam.width }}>
-                                Author
+                                <Typography>Author</Typography>
                             </th>
-                            <th>Keywords</th>
-                            <th>Summary</th>
+                            <th>
+                                <Typography>Keywords</Typography>
+                            </th>
+                            <th>
+                                <Typography>Summary</Typography>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        {viewData.map((el: Items) => {
+                        {viewData.map((item: Items) => {
                             return (
                                 <tr>
-                                    <td className="sticky">{el.title}</td>
+                                    <td className="sticky">
+                                        <Typography>{item.title}</Typography>
+                                    </td>
                                     <td
                                         className="sticky"
                                         style={{ left: stickyParam.width }}>
-                                        {el.author}
+                                        <Typography>{item.author}</Typography>
                                     </td>
-                                    <td>{el.keywords}</td>
                                     <td>
-                                        {el.summary.content.replace(
-                                            '&amp',
-                                            '&'
-                                        )}
+                                        <Typography>{item.keywords}</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography>
+                                            {item.summary.content.replace(
+                                                '&amp',
+                                                '&'
+                                            )}
+                                        </Typography>
                                     </td>
                                 </tr>
                             );

@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import TablePage from 'components/TablePage';
-import UsersPage from 'components/UsersPage';
 import 'App.scss';
+import UsersPage from 'pages/UsersPage';
+import TablePage from 'pages/TablePage';
+import { Typography } from 'components';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
     return (
@@ -12,7 +14,11 @@ function App() {
                     <Route path="/users" element={<UsersPage />} />
                     <Route
                         path="*"
-                        element={<h1 style={{ color: 'red' }}>Error</h1>}
+                        element={
+                            <Typography style={{ color: 'red', fontSize: 40 }}>
+                                Page not found
+                            </Typography>
+                        }
                     />
                 </Routes>
             </BrowserRouter>

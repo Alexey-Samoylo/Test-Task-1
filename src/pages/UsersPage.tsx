@@ -1,5 +1,5 @@
-import NavigateButton from 'elements/navigateButton';
-import UsersTable from 'elements/usersTable';
+import { NavigateButton } from 'components';
+import { UsersTable } from 'templates';
 
 const UsersPage = () => {
     return (

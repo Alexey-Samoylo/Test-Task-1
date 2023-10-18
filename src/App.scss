@@ -21,3 +21,13 @@
     border-radius: 5px;
     text-decoration: none;
 }
+* {
+    box-sizing: border-box;
+}
+button.addButton {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
