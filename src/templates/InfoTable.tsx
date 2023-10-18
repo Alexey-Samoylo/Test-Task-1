@@ -4,6 +4,7 @@ import { itemsAPI } from 'redux/services/itemsService';
 import { Coins, Items } from 'redux/models/reduxModels';
 import { InfoTablePagination, Typography } from 'components';
 import { ITEMS_PER_PAGE } from 'constants/main';
+import toast from 'react-hot-toast';
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null);
@@ -21,8 +22,14 @@ const InfoTable = () => {
             height: stickyElementRef.current?.clientHeight,
         });
     }, [viewData]);
-    const { data: items, isLoading } =
-        itemsAPI.useFetchAllItemsQuery(pageOffset);
+    const {
+        data: items,
+        isLoading,
+        error,
+    } = itemsAPI.useFetchAllItemsQuery(pageOffset);
+    useEffect(() => {
+        error && toast.error('Loading error');
+    }, []);
 
     return (
         <>
@@ -51,7 +58,12 @@ const InfoTable = () => {
                         </tr>
                     </thead>
                     {isLoading ? (
-                        <Spinner animation="border" variant="primary" />
+                        <div className="loadingSpinner">
+                            <Spinner
+                                animation="border"
+                                variant="primary"
+                            />
+                        </div>
                     ) : (
                         <tbody>
                             {items &&

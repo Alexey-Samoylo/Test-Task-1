@@ -31,3 +31,10 @@ button.addButton {
     gap: 5px;
     align-items: center;
 }
+.loadingSpinner{
+    position: fixed;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    padding-top: 10px;
+}
