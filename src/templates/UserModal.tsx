@@ -11,7 +11,6 @@ const UserModal = ({
     setUsersData,
     index,
 }: AddUserModalProps) => {
-
     const getUserDetails = (
         index: number | null,
         usersData: UserModalProps[]
