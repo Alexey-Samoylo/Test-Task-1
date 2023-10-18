@@ -24,3 +24,10 @@
 * {
     box-sizing: border-box;
 }
+button.addButton {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}

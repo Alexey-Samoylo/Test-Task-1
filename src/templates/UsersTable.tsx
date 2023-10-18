@@ -39,7 +39,7 @@ const UsersTable = () => {
             <Button
                 variant="success"
                 onClick={() => setOpen(true)}
-                style={{ marginBottom: '10px' }}>
+                className='addButton'>
                 <Typography>Add</Typography> <img alt="add" src={plus} />
             </Button>
             <Table striped bordered hover>
