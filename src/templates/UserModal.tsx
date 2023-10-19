@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { AddUserModalProps, FormTableFieldProps, UserModalProps } from 'models';
-import { EMPTY_USER_DETAILS, FORM_TABLE_FIELDS } from 'constants/main';
+import {
+    EMPTY_USER_DETAILS,
+    FORM_TABLE_FIELDS,
+    USER_MODAL_SELECTS,
+} from 'constants/main';
 import { Typography } from 'components';
 
 const UserModal = ({
@@ -22,14 +26,17 @@ const UserModal = ({
         getUserDetails(index, usersData)
     );
 
-    const getUsersDataUpdate = (index: number | null, usersData: UserModalProps[]) => {
+    const getUsersDataUpdate = (
+        index: number | null,
+        usersData: UserModalProps[]
+    ) => {
         if (!index) {
-            return [...usersData, newUser]
+            return [...usersData, newUser];
         } else {
-            usersData[index] = newUser
-            return [...usersData]
+            usersData[index] = newUser;
+            return [...usersData];
         }
-    }
+    };
     useEffect(() => {
         setNewUser(getUserDetails(index, usersData));
     }, [isOpen]);
@@ -72,7 +79,9 @@ const UserModal = ({
                             </Form.Group>
                         );
                     })}
-                    <Form.Label><Typography>Role</Typography></Form.Label>
+                    <Form.Label>
+                        <Typography>Role</Typography>
+                    </Form.Label>
                     <Form.Control
                         aria-label="Default select example"
                         as="select"
@@ -80,15 +89,13 @@ const UserModal = ({
                         onChange={e =>
                             setNewUser({ ...newUser, role: e.target.value })
                         }>
-                        <option value="Admin">
-                            <Typography>Admin</Typography>
-                        </option>
-                        <option value="User">
-                            <Typography>User</Typography>
-                        </option>
-                        <option value="Editor">
-                            <Typography>Editor</Typography>
-                        </option>
+                        {USER_MODAL_SELECTS.sort().map(selector => {
+                            return (
+                                <option value={selector}>
+                                    <Typography>{selector}</Typography>
+                                </option>
+                            );
+                        })}
                     </Form.Control>
                 </Form>
             </Modal.Body>

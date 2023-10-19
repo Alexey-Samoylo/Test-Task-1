@@ -1,35 +1,50 @@
 import { Table, Spinner } from 'react-bootstrap';
 import { useEffect, useState, useRef } from 'react';
 import { itemsAPI } from 'redux/services/itemsService';
-import { Coins, Items } from 'redux/models/reduxModels';
-import { InfoTablePagination, Typography } from 'components';
-import { ITEMS_PER_PAGE } from 'constants/main';
+import { Coins, Items, QueryProps } from 'redux/models/reduxModels';
+import { InfoTablePagination, Typography, TableSortButton } from 'components';
+import { ITEMS_PER_PAGE, COINS_TABLE_TITLE } from 'constants/main';
 import toast from 'react-hot-toast';
+import { TableSortState } from 'models';
 
 const InfoTable = () => {
     const stickyElementRef = useRef<HTMLTableHeaderCellElement>(null);
 
     const [pageOffset, setPageOffset] = useState(0);
-    const [viewData, setViewData] = useState<Items[]>([]);
     const [stickyParam, setStickyParam] = useState({
         width: stickyElementRef.current?.clientWidth,
         height: stickyElementRef.current?.clientHeight,
     });
+    const [tableSort, setTableSort] = useState<TableSortState>({
+        name: 'price',
+        value: 0,
+    });
+    const [queryProps, setQueryProps] = useState<QueryProps>({
+        pageOffset: pageOffset,
+        ...tableSort,
+    });
 
+    useEffect(() => {
+        setQueryProps({
+            ...tableSort,
+            pageOffset: pageOffset,
+        });
+    }, [pageOffset, tableSort]);
+
+    const {
+        data: items,
+        isLoading,
+        error,
+    } = itemsAPI.useFetchAllItemsQuery(queryProps);
+    useEffect(() => {
+        error && toast.error('Loading error');
+    }, []);
     useEffect(() => {
         setStickyParam({
             width: stickyElementRef.current?.clientWidth,
             height: stickyElementRef.current?.clientHeight,
         });
-    }, [viewData]);
-    const {
-        data: items,
-        isLoading,
-        error,
-    } = itemsAPI.useFetchAllItemsQuery(pageOffset);
-    useEffect(() => {
-        error && toast.error('Loading error');
-    }, []);
+    }, [items]);
 
     return (
         <>
@@ -41,28 +56,47 @@ const InfoTable = () => {
                 <Table striped bordered hover>
                     <thead>
                         <tr className="sticky" style={{ zIndex: 1000 }}>
-                            <th ref={stickyElementRef} className={'sticky'}>
-                                <Typography>Title</Typography>
-                            </th>
-                            <th
-                                className="sticky"
-                                style={{ left: stickyParam.width }}>
-                                <Typography>Author</Typography>
-                            </th>
-                            <th>
-                                <Typography>Keywords</Typography>
-                            </th>
-                            <th>
-                                <Typography>Summary</Typography>
-                            </th>
+                            {COINS_TABLE_TITLE.map((title, index) => {
+                                return (
+                                    <th
+                                        ref={
+                                            index === 0
+                                                ? stickyElementRef
+                                                : undefined
+                                        }
+                                        className={index === 0 ? 'sticky' : ''}
+                                        style={{
+                                            left:
+                                                index === 1
+                                                    ? stickyParam.width
+                                                    : '',
+                                        }}>
+                                        <div
+                                            style={{
+                                                display: 'flex',
+                                                justifyContent: 'space-between',
+                                            }}>
+                                            <Typography>
+                                                {title.label}
+                                            </Typography>
+                                            {title.value ? (
+                                                <TableSortButton
+                                                    TableSort={tableSort}
+                                                    setTableSort={setTableSort}
+                                                    nameSort={title.value}
+                                                />
+                                            ) : (
+                                                ''
+                                            )}
+                                        </div>
+                                    </th>
+                                );
+                            })}
                         </tr>
                     </thead>
                     {isLoading ? (
                         <div className="loadingSpinner">
-                            <Spinner
-                                animation="border"
-                                variant="primary"
-                            />
+                            <Spinner animation="border" variant="primary" />
                         </div>
                     ) : (
                         <tbody>

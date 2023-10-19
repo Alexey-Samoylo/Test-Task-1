@@ -31,10 +31,21 @@ button.addButton {
     gap: 5px;
     align-items: center;
 }
-.loadingSpinner{
+.loadingSpinner {
     position: fixed;
     display: flex;
     width: 100%;
     justify-content: center;
     padding-top: 10px;
+}
+.UserTableSortButton {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    width: min-content;
+    div {
+        height: 10px;
+        font-size: 10px;
+        cursor: pointer;
+    }
 }

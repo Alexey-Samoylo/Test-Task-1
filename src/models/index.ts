@@ -28,5 +28,14 @@ export interface TypographyProps {
 }
 export interface InfoTablePaginationProps {
     setPageOffset: Dispatch<SetStateAction<number>>;
-    totalPages: number
+    totalPages: number;
+}
+export interface TableSortState {
+    name: string;
+    value: number;
+}
+export interface TableSortProps {
+    TableSort: TableSortState;
+    setTableSort: Dispatch<SetStateAction<TableSortState>>;
+    nameSort: string;
 }

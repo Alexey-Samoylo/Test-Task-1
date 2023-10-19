@@ -1,5 +1,5 @@
-import e from "express";
-import { string } from "yargs";
+import e from 'express';
+import { string } from 'yargs';
 
 export interface Items {
     alternate: [object];
@@ -30,11 +30,13 @@ export interface DataItems {
 }
 
 export interface CoinsData {
-    data: [{
-        coins: Coins[];
-        stats: [];
-    }];
-    status: string
+    data: [
+        {
+            coins: Coins[];
+            stats: [];
+        },
+    ];
+    status: string;
 }
 export interface Coins {
     '24hVolume': string;
@@ -52,5 +54,10 @@ export interface Coins {
     sparkline: [string];
     symbol: string;
     tier: number;
-    uuid: string
+    uuid: string;
+}
+export interface QueryProps {
+    pageOffset: number;
+    name: string;
+    value: number;
 }
