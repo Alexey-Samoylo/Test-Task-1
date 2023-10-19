@@ -14,24 +14,30 @@ const FORM_TABLE_FIELDS = [
         value: 'email',
     },
 ];
-const USER_TABLE_TITLE = [
+const USER_TABLE_TITLES = [
     ...FORM_TABLE_FIELDS,
     { label: 'Role', value: 'role' },
 ];
-const COINS_TABLE_TITLE = [
+const COINS_TABLE_TITLES = [
     {
         label: 'Name',
+        value: 'name',
+        toSort: false,
     },
     {
         label: 'UUID',
+        value: 'uuid',
+        toSort: false,
     },
     {
         label: 'Price',
         value: 'price',
+        toSort: true,
     },
     {
         label: 'Market Cap',
         value: 'marketCap',
+        toSort: true,
     },
 ];
 const EMPTY_USER_DETAILS = {
@@ -58,6 +64,6 @@ export {
     ITEMS_PER_PAGE,
     DEFAULT_TYPOGRAPHY_STYLES,
     USER_MODAL_SELECTS,
-    USER_TABLE_TITLE,
-    COINS_TABLE_TITLE,
+    USER_TABLE_TITLES,
+    COINS_TABLE_TITLES,
 };

@@ -6,7 +6,7 @@ import edit from '../assets/images/pencil.svg';
 import { UserModal } from 'templates';
 import { UserModalProps, TableSortState } from 'models';
 import { Typography, TableSortButton } from 'components';
-import { USER_TABLE_TITLE } from 'constants/main';
+import { USER_TABLE_TITLES } from 'constants/main';
 import sortUserTable from 'helpers/sortUserTable';
 
 const UsersTable = () => {
@@ -51,7 +51,7 @@ const UsersTable = () => {
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        {USER_TABLE_TITLE.map(title => {
+                        {USER_TABLE_TITLES.map(title => {
                             return (
                                 <th>
                                     <div

@@ -39,3 +39,8 @@ export interface TableSortProps {
     setTableSort: Dispatch<SetStateAction<TableSortState>>;
     nameSort: string;
 }
+export interface coinsTableTitleProps {
+    title: string;
+    value: string;
+    toSort: boolean;
+}

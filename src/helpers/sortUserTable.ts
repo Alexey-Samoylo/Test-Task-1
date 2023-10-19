@@ -4,17 +4,19 @@ const sortUserTable = (
     usersData: UserModalProps[],
     userTableSort: TableSortState
 ) => {
-    const newArray: UserModalProps[] = [...usersData].sort(
-        (a: UserModalProps, b: UserModalProps) =>
+    const sortuserFN = (a: UserModalProps, b: UserModalProps) => {
+        switch (
             a[userTableSort.name as keyof UserModalProps] >
             b[userTableSort.name as keyof UserModalProps]
-                ? userTableSort.value === 1
-                    ? 1
-                    : -1
-                : userTableSort.value === 1
-                ? -1
-                : 1
-    );
+        ) {
+            case true:
+                return userTableSort.value === 1 ? 1 : -1;
+            case false:
+                return userTableSort.value === 2 ? -1 : 1;
+        }
+    };
+    const newArray: UserModalProps[] = [...usersData].sort(sortuserFN);
+    console.log(newArray);
     return [1, 2].includes(userTableSort.value) ? newArray : usersData;
 };
 
