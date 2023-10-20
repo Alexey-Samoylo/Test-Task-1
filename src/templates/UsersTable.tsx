@@ -90,20 +90,6 @@ const UsersTable = () => {
                                             </td>
                                         );
                                     })}
-                                    {/* <td>
-                                        <Typography>
-                                            {user.firstName}
-                                        </Typography>
-                                    </td>
-                                    <td>
-                                        <Typography>{user.lastName}</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography>{user.email}</Typography>
-                                    </td>
-                                    <td>
-                                        <Typography>{user.role}</Typography>
-                                    </td> */}
                                     <td>
                                         <img
                                             src={edit}

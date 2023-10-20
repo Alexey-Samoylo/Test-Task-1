@@ -46,6 +46,21 @@ const FORM_TABLE_FIELDS = [
         value: 'testField8',
     },
 ];
+const FROMIK_TABLE_FIELDS_VALIDATION = {
+    text: [
+        'firstName',
+        'lastName',
+        'testField1',
+        'testField2',
+        'testField3',
+        'testField4',
+        'testField5',
+        'testField6',
+        'testField7',
+        'testField8',
+    ],
+    email: ['email'],
+};
 const USER_TABLE_TITLES = [
     ...FORM_TABLE_FIELDS,
     { label: 'Role', value: 'role' },
@@ -106,4 +121,5 @@ export {
     USER_MODAL_SELECTS,
     USER_TABLE_TITLES,
     COINS_TABLE_TITLES,
+    FROMIK_TABLE_FIELDS_VALIDATION,
 };
