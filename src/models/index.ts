@@ -1,6 +1,6 @@
+import { FormikErrors, FormikTouched } from 'formik';
 import { Dispatch, SetStateAction } from 'react';
 import { ReactNode, CSSProperties, Ref } from 'react';
-import { Items } from 'redux/models/reduxModels';
 
 export interface AddUserModalProps {
     isOpen: boolean;
@@ -23,6 +23,7 @@ export interface UserModalProps {
     testField8: string;
     role: string;
 }
+
 export interface FormTableFieldProps {
     value: string;
     label: string;
@@ -51,4 +52,37 @@ export interface coinsTableTitleProps {
     title: string;
     value: string;
     toSort: boolean;
+}
+export interface FormikValuesProps {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    testField1?: string;
+    testField2?: string;
+    testField3?: string;
+    testField4?: string;
+    testField5?: string;
+    testField6?: string;
+    testField7?: string;
+    testField8?: string;
+    role?: string;
+}
+export interface FormikProps {
+    values: FormikValuesProps;
+    errors?: FormikErrors<FormikValuesProps>;
+    touched?: FormikTouched<FormikValuesProps>;
+    handleChange?: {
+        (e: React.ChangeEvent<any>): void;
+        <T = string | React.ChangeEvent<any>>(
+            field: T
+        ): T extends React.ChangeEvent<any>
+            ? void
+            : (e: string | React.ChangeEvent<any>) => void;
+    };
+    handleBlur?: {
+        (e: React.FocusEvent<any, Element>): void;
+        <T = any>(fieldOrEvent: T): T extends string ? (e: any) => void : void;
+    };
+    handleSubmit?: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
+    isSubmitting?: boolean;
 }
