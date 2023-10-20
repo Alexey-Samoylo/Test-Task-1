@@ -4,16 +4,22 @@ import minus from '../assets/images/minus.svg';
 import plus from '../assets/images/plus.svg';
 import edit from '../assets/images/pencil.svg';
 import { UserModal } from 'templates';
-import { UserModalProps } from 'models';
-import { Typography } from 'components';
+import { UserModalProps, TableSortState } from 'models';
+import { Typography, TableSortButton } from 'components';
+import { FORM_TABLE_FIELDS, USER_TABLE_TITLES } from 'constants/main';
+import sortUserTable from 'helpers/sortUserTable';
 
 const UsersTable = () => {
     const localStorageUsersData = localStorage.getItem('usersData');
-    const [usersData, setUsersData] = useState(
+    const [usersData, setUsersData] = useState<UserModalProps[]>(
         localStorageUsersData ? JSON.parse(localStorageUsersData) : []
     );
     const [isOpen, setOpen] = useState(false);
     const [editUserIndex, setEditUserIndex] = useState<number | null>(null);
+    const [userTableSort, setUserTableSort] = useState<TableSortState>({
+        name: 'firstName',
+        value: 0,
+    });
 
     const deleteUser = (index: number) => {
         usersData.splice(index, 1);
@@ -39,60 +45,83 @@ const UsersTable = () => {
             <Button
                 variant="success"
                 onClick={() => setOpen(true)}
-                className='addButton'>
+                className="addButton">
                 <Typography>Add</Typography> <img alt="add" src={plus} />
             </Button>
             <Table striped bordered hover>
                 <thead>
                     <tr>
-                        <th>
-                            <Typography>First Name</Typography>
-                        </th>
-                        <th>
-                            <Typography>Second Name</Typography>
-                        </th>
-                        <th>
-                            <Typography>Email</Typography>
-                        </th>
-                        <th>
-                            <Typography>Role</Typography>
-                        </th>
+                        {USER_TABLE_TITLES.map(title => {
+                            return (
+                                <th>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'space-between',
+                                        }}>
+                                        <Typography>{title.label}</Typography>
+                                        <TableSortButton
+                                            TableSort={userTableSort}
+                                            setTableSort={setUserTableSort}
+                                            nameSort={title.value}
+                                        />
+                                    </div>
+                                </th>
+                            );
+                        })}
                         <th colSpan={2}></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {usersData.map((user: UserModalProps, index: number) => {
-                        return (
-                            <tr>
-                                <td>
-                                    <Typography>{user.firstName}</Typography>
-                                </td>
-                                <td>
-                                    <Typography>{user.lastName}</Typography>
-                                </td>
-                                <td>
-                                    <Typography>{user.email}</Typography>
-                                </td>
-                                <td>
-                                    <Typography>{user.role}</Typography>
-                                </td>
-                                <td>
-                                    <img
-                                        src={edit}
-                                        alt="edit"
-                                        onClick={() => editUser(index)}
-                                    />
-                                </td>
-                                <td>
-                                    <img
-                                        src={minus}
-                                        alt="minus"
-                                        onClick={() => deleteUser(index)}
-                                    />
-                                </td>
-                            </tr>
-                        );
-                    })}
+                    {sortUserTable(usersData, userTableSort).map(
+                        (user: UserModalProps, index: number) => {
+                            return (
+                                <tr>
+                                    {FORM_TABLE_FIELDS.map(field => {
+                                        return (
+                                            <td>
+                                                <Typography>
+                                                    {
+                                                        user[
+                                                            field.value as keyof UserModalProps
+                                                        ]
+                                                    }
+                                                </Typography>
+                                            </td>
+                                        );
+                                    })}
+                                    {/* <td>
+                                        <Typography>
+                                            {user.firstName}
+                                        </Typography>
+                                    </td>
+                                    <td>
+                                        <Typography>{user.lastName}</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography>{user.email}</Typography>
+                                    </td>
+                                    <td>
+                                        <Typography>{user.role}</Typography>
+                                    </td> */}
+                                    <td>
+                                        <img
+                                            src={edit}
+                                            alt="edit"
+                                            onClick={() => editUser(index)}
+                                        />
+                                    </td>
+                                    <td>
+                                        <img
+                                            src={minus}
+                                            alt="minus"
+                                            onClick={() => deleteUser(index)}
+                                        />
+                                    </td>
+                                </tr>
+                            );
+                        }
+                    )}
                 </tbody>
             </Table>
             <div>
