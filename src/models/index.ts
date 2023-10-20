@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
 import { ReactNode, CSSProperties, Ref } from 'react';
-import { Items } from 'redux/models/reduxModels';
 
 export interface AddUserModalProps {
     isOpen: boolean;
@@ -51,4 +50,17 @@ export interface coinsTableTitleProps {
     title: string;
     value: string;
     toSort: boolean;
+}
+export interface UserModalFormVAlidation {
+    firstName: {};
+    lastName: {};
+    email: {};
+    testField1: {};
+    testField2: {};
+    testField3: {};
+    testField4: {};
+    testField5: {};
+    testField6: {};
+    testField7: {};
+    testField8: {};
 }
