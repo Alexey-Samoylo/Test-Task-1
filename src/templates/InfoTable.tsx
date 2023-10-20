@@ -53,7 +53,7 @@ const InfoTable = () => {
                 totalPages={items?.data.stats.total / ITEMS_PER_PAGE ?? 0}
             />
             <div className="tableCard">
-                {!isLoading ? (
+                {isLoading ? (
                     <div style={{ position: 'relative' }}>
                         <div className="loadingSpinner">
                             <Spinner animation="border" variant="primary" />

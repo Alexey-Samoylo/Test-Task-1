@@ -16,7 +16,6 @@ const sortUserTable = (
         }
     };
     const newArray: UserModalProps[] = [...usersData].sort(sortuserFN);
-    console.log(newArray);
     return [1, 2].includes(userTableSort.value) ? newArray : usersData;
 };
 

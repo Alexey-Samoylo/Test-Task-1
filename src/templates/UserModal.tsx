@@ -54,7 +54,7 @@ const UserModal = ({
                     <Typography>Add new user</Typography>
                 </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body className="modalBody">
                 <Form>
                     {FORM_TABLE_FIELDS.map((field: FormTableFieldProps) => {
                         return (

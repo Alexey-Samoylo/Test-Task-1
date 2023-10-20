@@ -6,7 +6,7 @@ import edit from '../assets/images/pencil.svg';
 import { UserModal } from 'templates';
 import { UserModalProps, TableSortState } from 'models';
 import { Typography, TableSortButton } from 'components';
-import { USER_TABLE_TITLES } from 'constants/main';
+import { FORM_TABLE_FIELDS, USER_TABLE_TITLES } from 'constants/main';
 import sortUserTable from 'helpers/sortUserTable';
 
 const UsersTable = () => {
@@ -77,7 +77,20 @@ const UsersTable = () => {
                         (user: UserModalProps, index: number) => {
                             return (
                                 <tr>
-                                    <td>
+                                    {FORM_TABLE_FIELDS.map(field => {
+                                        return (
+                                            <td>
+                                                <Typography>
+                                                    {
+                                                        user[
+                                                            field.value as keyof UserModalProps
+                                                        ]
+                                                    }
+                                                </Typography>
+                                            </td>
+                                        );
+                                    })}
+                                    {/* <td>
                                         <Typography>
                                             {user.firstName}
                                         </Typography>
@@ -90,7 +103,7 @@ const UsersTable = () => {
                                     </td>
                                     <td>
                                         <Typography>{user.role}</Typography>
-                                    </td>
+                                    </td> */}
                                     <td>
                                         <img
                                             src={edit}

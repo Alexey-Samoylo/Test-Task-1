@@ -13,6 +13,14 @@ export interface UserModalProps {
     firstName: string;
     lastName: string;
     email: string;
+    testField1: string;
+    testField2: string;
+    testField3: string;
+    testField4: string;
+    testField5: string;
+    testField6: string;
+    testField7: string;
+    testField8: string;
     role: string;
 }
 export interface FormTableFieldProps {

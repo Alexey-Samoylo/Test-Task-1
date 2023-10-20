@@ -13,6 +13,38 @@ const FORM_TABLE_FIELDS = [
         label: 'Email',
         value: 'email',
     },
+    {
+        label: 'Test Field1',
+        value: 'testField1',
+    },
+    {
+        label: 'Test Field2',
+        value: 'testField2',
+    },
+    {
+        label: 'Test Field3',
+        value: 'testField3',
+    },
+    {
+        label: 'Test Field4',
+        value: 'testField4',
+    },
+    {
+        label: 'Test Field5',
+        value: 'testField5',
+    },
+    {
+        label: 'Test Field6',
+        value: 'testField6',
+    },
+    {
+        label: 'Test Field7',
+        value: 'testField7',
+    },
+    {
+        label: 'Test Field8',
+        value: 'testField8',
+    },
 ];
 const USER_TABLE_TITLES = [
     ...FORM_TABLE_FIELDS,
@@ -44,6 +76,14 @@ const EMPTY_USER_DETAILS = {
     firstName: '',
     lastName: '',
     email: '',
+    testField1: '',
+    testField2: '',
+    testField3: '',
+    testField4: '',
+    testField5: '',
+    testField6: '',
+    testField7: '',
+    testField8: '',
     role: 'Admin',
 };
 const ITEMS_PER_PAGE = 50;
