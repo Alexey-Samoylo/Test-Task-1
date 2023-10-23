@@ -1,3 +1,4 @@
+import { UserModalFormVAlidation } from 'models';
 import { CSSProperties } from 'react';
 
 const FORM_TABLE_FIELDS = [
@@ -97,6 +98,29 @@ const DEFAULT_TYPOGRAPHY_STYLES: CSSProperties = {
     display: 'block',
 };
 const USER_MODAL_SELECTS = ['Admin', 'Editor', 'User'];
+const TEXT_VALIDATION = {
+    required: 'This field is required.',
+};
+const EMAIL_VALIDATION = {
+    ...TEXT_VALIDATION,
+    pattern: {
+        value: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
+        message: 'Incorrect email.',
+    },
+};
+const USER_TABLE_FROM_VALIDATION: UserModalFormVAlidation = {
+    firstName: TEXT_VALIDATION,
+    lastName: TEXT_VALIDATION,
+    email: EMAIL_VALIDATION,
+    testField1: TEXT_VALIDATION,
+    testField2: TEXT_VALIDATION,
+    testField3: TEXT_VALIDATION,
+    testField4: TEXT_VALIDATION,
+    testField5: TEXT_VALIDATION,
+    testField6: TEXT_VALIDATION,
+    testField7: TEXT_VALIDATION,
+    testField8: TEXT_VALIDATION,
+};
 
 export {
     FORM_TABLE_FIELDS,
@@ -106,4 +130,7 @@ export {
     USER_MODAL_SELECTS,
     USER_TABLE_TITLES,
     COINS_TABLE_TITLES,
+    TEXT_VALIDATION,
+    EMAIL_VALIDATION,
+    USER_TABLE_FROM_VALIDATION,
 };
