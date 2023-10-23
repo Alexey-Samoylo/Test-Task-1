@@ -1,4 +1,4 @@
-import { UserModalFormVAlidation } from 'models';
+import { UserModalFormValidation } from 'models';
 import { CSSProperties } from 'react';
 
 const FORM_TABLE_FIELDS = [
@@ -108,7 +108,7 @@ const EMAIL_VALIDATION = {
         message: 'Incorrect email.',
     },
 };
-const USER_TABLE_FROM_VALIDATION: UserModalFormVAlidation = {
+const USER_TABLE_FROM_VALIDATION: UserModalFormValidation = {
     firstName: TEXT_VALIDATION,
     lastName: TEXT_VALIDATION,
     email: EMAIL_VALIDATION,

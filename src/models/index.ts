@@ -51,7 +51,7 @@ export interface coinsTableTitleProps {
     value: string;
     toSort: boolean;
 }
-export interface UserModalFormVAlidation {
+export interface UserModalFormValidation {
     firstName: {};
     lastName: {};
     email: {};

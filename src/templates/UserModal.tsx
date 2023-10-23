@@ -2,7 +2,7 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import {
     AddUserModalProps,
     FormTableFieldProps,
-    UserModalFormVAlidation,
+    UserModalFormValidation,
     UserModalProps,
 } from 'models';
 import {
@@ -81,7 +81,7 @@ const UserModal = ({
                                         {...register(
                                             field.value as any,
                                             USER_TABLE_FROM_VALIDATION[
-                                                field.value as keyof UserModalFormVAlidation
+                                                field.value as keyof UserModalFormValidation
                                             ]
                                         )}
                                         placeholder={field.label}
